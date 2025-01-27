@@ -16,6 +16,7 @@ const app = express();
 app.use(express.json());
 
 // Swagger
+// @ts-ignore
 import setupSwaggerV1 from '../swagger/v1/main.js';
 setupSwaggerV1(app);
 
