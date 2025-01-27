@@ -1,7 +1,7 @@
 const info = {
-    title: "CRUD de Usuarios API",
-    version: "1.0.0",
-    description: `API diseñada para gestionar usuarios, proporcionando funcionalidad de registro, autenticación, actualización y eliminación de datos de usuarios.
+  title: "CRUD de Usuarios API",
+  version: "1.0.0",
+  description: `API diseñada para gestionar usuarios, proporcionando funcionalidad de registro, autenticación, actualización y eliminación de datos de usuarios.
 
 ### Funcionalidades
 - **Registro de Usuarios**: Crear nuevos usuarios con validaciones.
@@ -18,11 +18,11 @@ const info = {
 - **Autenticación**: Se requiere un token JWT para acceder a los endpoints protegidos.
 - **Swagger UI**: Incluye documentación interactiva para probar los endpoints fácilmente.
 `,
-    contact: {
-        name: "Eduardo M Moreno",
-        url: "https://edummorenolp.github.io/LandingPageSimple/",
-        email: "e.m.morenolp@gmail.com"
-    }
+  contact: {
+    name: "Eduardo M Moreno",
+    url: "https://edummorenolp.github.io/LandingPageSimple/",
+    email: "e.m.morenolp@gmail.com",
+  },
 };
 
 export default info;

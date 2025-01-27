@@ -6,23 +6,23 @@ Este proyecto utiliza **Swagger** para documentar y explorar las API del sistema
 
 ## ⚙️ Configuración de Servidores Dinámicos
 
-La configuración de los servidores en Swagger utiliza 
+La configuración de los servidores en Swagger utiliza
 variables dinámicas que se definen en el archivo `.
-env`. Esto permite adaptar fácilmente el 
+env`. Esto permite adaptar fácilmente el
 comportamiento del servidor según el entorno.
 
 ### Variables disponibles
 
-- **`BASE_URL`**: Define la URL base del servidor (por 
-defecto: `http://localhost`).
-- **`PORT`**: Especifica el puerto del servidor (por 
-defecto: `3001`).
-- **`BASE_PATH`**: Indica la ruta base de la API (por 
-defecto: `api`).
-- **`VERSIONS_API`**: Lista de versiones disponibles 
-de la API, separadas por comas (por defecto: `v1`).
+- **`BASE_URL`**: Define la URL base del servidor (por
+  defecto: `http://localhost`).
+- **`PORT`**: Especifica el puerto del servidor (por
+  defecto: `3001`).
+- **`BASE_PATH`**: Indica la ruta base de la API (por
+  defecto: `api`).
+- **`VERSIONS_API`**: Lista de versiones disponibles
+  de la API, separadas por comas (por defecto: `v1`).
 
-Consulta el archivo `.env.example` para ver un ejemplo 
+Consulta el archivo `.env.example` para ver un ejemplo
 completo de cómo configurar estas variables.
 
 ```bash
@@ -42,12 +42,13 @@ Una vez que el backend esté en ejecución, puedes acceder a la documentación d
 ```bash
 npm run dev
 ```
+
 ### Al iniciar, se mostrará en la consola:
 
 ```bash
 ==================================================
-🚀 Servidor corriendo en: http://localhost:3001   
-📃 Swagger Docs: http://localhost:3001/api-docs   
+🚀 Servidor corriendo en: http://localhost:3001
+📃 Swagger Docs: http://localhost:3001/api-docs
 ==================================================
 ```
 
