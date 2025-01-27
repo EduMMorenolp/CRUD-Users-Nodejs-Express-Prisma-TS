@@ -1,4 +1,4 @@
-# **CRUD Users API - Node.js, Express, TypeScript**
+# **CRUD Users API - Node.js, Express, TypeScript, Prisma**
 
 ## 📜 **Descripción**
 
@@ -52,40 +52,51 @@ Este proyecto es una API RESTful para gestionar usuarios, construida utilizando 
 4. Crea el archivo `.env` con las siguientes variables de entorno (puedes usar el [.env.example](#) como guia):
 
    ```env
-   DB_HOST=localhost
-   DB_USER=tu_usuario
-   DB_PASSWORD=tu_contraseña
-   DB_NAME=nombre_base_de_datos
-   JWT_SECRET=tu_clave_secreta
+   # Puerto del servidor
+   PORT=3000
+
+   # Configuración de la base de datos MySQL
+   DATABASE_URL="mysql://user:password@host:port/database"
+
+   # Configuración de JWT
+   JWT_SECRET=yoursecretkey
+   JWT_EXPIRES_IN=1h
+
+   # Configuracion de Swagger Server
+   BASE_PATH=api
+   VERSIONS_API=v1
+   BASE_URL=http://localhost
    ```
 
 5. Si es necesario, ejecuta las migraciones de la base de datos (si usas Prisma):
 
-   ```bash
-   npx prisma migrate dev
-   ```
+```bash
+npx prisma migrate dev
+````
 
 ## ⚡ **Ejecución**
 
-Para iniciar el servidor en modo desarrollo, ejecuta el siguiente comando:
+Para iniciar el servidor, ejecuta el siguiente comando:
 
 ```bash
 npm run start
 ```
 
 ## 📃 **Documentación API (Swagger UI)**
-Puedes acceder a la documentación interactiva de la API a través de Swagger UI en la URL que aparece en consola 
+
+Accede a la documentación interactiva de Swagger UI después de iniciar el servidor:
 
 ```bash
 ==================================================
 🚀 Servidor corriendo en: http://localhost:3000
 📃 Swagger Docs: http://localhost:3000/api-docs
-==================================================  
+==================================================
 ```
 
-## **Licencia**
+## 📝 **Licencia**
 
 Este proyecto está bajo la licencia MIT.
 
 ## 🌟 Contribuciones
+
 ¡Las contribuciones son bienvenidas! Si tienes sugerencias o encuentras errores, no dudes en crear un issue o enviar un pull request.
