@@ -43,12 +43,13 @@ export const loginUserService = async (email: string, password: string) => {
     if (!user) {
       return null;
     }
+    const userId: string = user.id;
 
     // Comparar la contraseña
     const isMatch = await comparePassword(password, user.password);
     if (isMatch) {
       const state = true;
-      await logoutUserModel(user.id, state);
+      await logoutUserModel(userId, state);
       return user;
     }
 
@@ -63,7 +64,6 @@ export const logoutUserService = async (userId: string) => {
   try {
     const state = false;
     const success = await logoutUserModel(userId, state);
-    console.log(success);
     if (!success) {
       throw new CustomError(
         "No se pudo cerrar sesión; el usuario no existe o ya estaba inactivo.",
@@ -78,6 +78,6 @@ export const logoutUserService = async (userId: string) => {
 };
 
 // Generar el token JWT (ya no es necesario redefinir la función)
-export const generateAuthTokenForUser = (userId: number, role: string) => {
+export const generateAuthTokenForUser = (userId: string, role: string) => {
   return generateAuthToken(userId, role);
 };

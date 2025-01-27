@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // Generar el token JWT
-export const generateAuthToken = (userId: number, userRol: string) => {
+export const generateAuthToken = (userId: string, userRol: string) => {
   const payload = { userId, userRol };
   const jwtSecret = process.env.JWT_SECRET;
   if (!jwtSecret) {

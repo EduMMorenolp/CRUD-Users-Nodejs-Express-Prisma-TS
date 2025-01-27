@@ -50,19 +50,23 @@ export const loginUserController = async (
       res.status(401).json({
         message: "Credenciales inválidas",
       });
+      return;
     }
+    const userId = user.id;
+    const userRole = user.role;
+    const userEmail = user.email;
+    const userName = user.username;
     // Generación del token JWT
-    const token = await generateAuthTokenForUser(user.id, user.role);
+    const token = await generateAuthTokenForUser(userId, userRole);
     // Respuesta exitosa con token
     res.status(200).json({
       message: "Inicio de sesión exitoso",
       token,
       user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        rol: user.role,
-        coins: user.coins,
+        id: userId,
+        username: userName,
+        email: userEmail,
+        rol: userRole,
       },
     });
   } catch (error) {
