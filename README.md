@@ -1,10 +1,10 @@
 # **CRUD Users API - Node.js, Express, TypeScript**
 
-## **Descripción**
+## 📜 **Descripción**
 
 Este proyecto es una API RESTful para gestionar usuarios, construida utilizando Node.js, Express y TypeScript. Permite crear, leer, actualizar y eliminar usuarios con un enfoque en autenticación JWT, roles de usuario, y manejo de contraseñas mediante `bcryptjs`.
 
-## **Características**
+## ✨ **Características**
 
 - **Autenticación JWT**: Utiliza JSON Web Tokens (JWT) para la autenticación de usuarios.
 - **Roles de usuario**: Soporta roles de usuario, permitiendo la gestión de accesos con permisos específicos.
@@ -13,7 +13,7 @@ Este proyecto es una API RESTful para gestionar usuarios, construida utilizando 
 - **Manejo de contraseñas**: Las contraseñas se cifran con `bcryptjs` para asegurar la seguridad de los datos.
 - **Swagger UI**: Documentación de la API accesible a través de Swagger.
 
-## **Tecnologías utilizadas**
+## 🛠️ **Tecnologías utilizadas**
 
 - **Node.js**: Entorno de ejecución de JavaScript.
 - **Express**: Framework para aplicaciones web.
@@ -23,18 +23,18 @@ Este proyecto es una API RESTful para gestionar usuarios, construida utilizando 
 - **bcryptjs**: Cifrado y comparación de contraseñas.
 - **Swagger UI**: Documentación interactiva de la API.
 
-## **Requisitos**
+## 📋 **Requisitos**
 
 - **Node.js** (v16 o superior)
 - **npm** (o **yarn** como alternativa)
-- **MySQL** o **MariaDB** (para la base de datos)
+- **MySQL** (para la base de datos)
 
-## **Instalación**
+## 🚀 **Instalación**
 
 1. Clona este repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/CRUD-Users-Nodejs-Express-Prisma-TS.git
+   git clone https://github.com/(usuario)/CRUD-Users-Nodejs-Express-Prisma-TS.git
    ```
 
 2. Accede al directorio del proyecto:
@@ -65,17 +65,27 @@ Este proyecto es una API RESTful para gestionar usuarios, construida utilizando 
    npx prisma migrate dev
    ```
 
-## **Ejecución**
+## ⚡ **Ejecución**
 
 Para iniciar el servidor en modo desarrollo, ejecuta el siguiente comando:
 
 ```bash
-npm run dev
+npm run start
 ```
 
-## **Documentación API (Swagger UI)**
-Puedes acceder a la documentación interactiva de la API a través de Swagger UI en la siguiente URL
+## 📃 **Documentación API (Swagger UI)**
+Puedes acceder a la documentación interactiva de la API a través de Swagger UI en la URL que aparece en consola 
+
+```bash
+==================================================
+🚀 Servidor corriendo en: http://localhost:3000
+📃 Swagger Docs: http://localhost:3000/api-docs
+==================================================  
+```
 
 ## **Licencia**
 
 Este proyecto está bajo la licencia MIT.
+
+## 🌟 Contribuciones
+¡Las contribuciones son bienvenidas! Si tienes sugerencias o encuentras errores, no dudes en crear un issue o enviar un pull request.
