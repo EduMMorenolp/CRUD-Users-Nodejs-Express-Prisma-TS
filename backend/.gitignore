@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# TypeScript
+dist/
+*.tsbuildinfo
+
+# Visual Studio Code
+.vscode/
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# dotenv environment files
+.env
+
+# log files
+*.log
+
+# IDE files
+.idea/
+
+# Build artifacts
+build/
+
+# Coverage directory used by testing tools
+coverage/
