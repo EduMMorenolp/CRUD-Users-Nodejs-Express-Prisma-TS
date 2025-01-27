@@ -9,10 +9,12 @@ dotenv.config();
 export const generateAuthToken = (userId: string, userRol: string) => {
   const payload = { userId, userRol };
   const jwtSecret = process.env.JWT_SECRET;
+  const expiresInProcess = process.env.JWT_EXPIRES_IN;
+  const expiresIn = expiresInProcess ? parseInt(expiresInProcess) : 3600;
   if (!jwtSecret) {
     throw new Error("JWT_SECRET no está definido en el archivo .env");
   }
-  const token = jwt.sign(payload, jwtSecret, { expiresIn: "1h" });
+  const token = jwt.sign(payload, jwtSecret, { expiresIn });
   return token;
 };
 
