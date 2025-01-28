@@ -10,7 +10,7 @@ import { authenticateToken } from '../middleware/authMiddleware.js';
 // Middlewares
 import { handleValidationErrors } from '../middleware/handleValidationErrors.js';
 import { validateRegisterUser, validateLoginUser } from
-    '../middleware/validation/userValidation.js';
+    '../validation/userValidation.js';
 
 const router = express.Router();
 

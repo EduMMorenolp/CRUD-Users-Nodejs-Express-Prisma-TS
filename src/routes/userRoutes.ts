@@ -7,7 +7,7 @@ import { deleteUser, getAllUsers, getUserById, updateUser, restoreUser } from '.
 import { authenticateToken } from '../middleware/authMiddleware.js';
 import { verifyAdmin } from '../middleware/verifyAdmin.js';
 import { handleValidationErrors } from '../middleware/handleValidationErrors.js';
-import { validateUpdateUser } from '../middleware/validation/userValidation.js';
+import { validateUpdateUser } from '../validation/userValidation.js';
 import { checkUserActiveMiddleware } from '../middleware/checkUserActiveMiddleware.js';
 
 const router = express.Router();
