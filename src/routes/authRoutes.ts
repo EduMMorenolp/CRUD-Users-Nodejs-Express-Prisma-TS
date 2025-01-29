@@ -1,23 +1,33 @@
-// 
+//
 
-import express from 'express';
+import express from "express";
 import {
-    registerUser, loginUserController, logoutUserController
-} from
-    '../controllers/authController.js';
-import { authenticateToken } from '../middleware/authMiddleware.js';
+  registerUser,
+  loginUserController,
+  logoutUserController,
+} from "../controllers/authController.js";
+import { authenticateToken } from "../middleware/authTokenMiddleware.js";
+
+import { validateUserLogin, validateUserRegister } from "../validation/auth.js";
+
+import { handleValidationErrors } from "../middleware/handleValidationErrors.js";
 
 // Middlewares
-import { handleValidationErrors } from '../middleware/handleValidationErrors.js';
-import { validateRegisterUser, validateLoginUser } from
-    '../validation/userValidation.js';
 
 const router = express.Router();
 
-router.post('/register', validateRegisterUser,
-    handleValidationErrors, registerUser);
-router.post('/login', validateLoginUser,
-    handleValidationErrors, loginUserController);
-router.post('/logout', authenticateToken, logoutUserController);
+router.post(
+  "/register",
+  validateUserRegister,
+  handleValidationErrors,
+  registerUser
+);
+router.post(
+  "/login",
+  validateUserLogin,
+  handleValidationErrors,
+  loginUserController
+);
+router.post("/logout", authenticateToken, logoutUserController);
 
 export default router;

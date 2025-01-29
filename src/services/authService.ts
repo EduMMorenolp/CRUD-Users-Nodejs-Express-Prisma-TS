@@ -15,24 +15,22 @@ export const createUserService = async (
   password: string
 ) => {
   try {
-    if (!username || !email || !password) {
-      throw new Error("All fields are required");
-    }
-
-    // Cifrar la contraseña
-    const hashedPassword = await hashPassword(password);
-
     // Verificar el email
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
       throw new CustomError("El correo electrónico ya está en uso", 409);
     }
+    // Cifrar la contraseña
+    const hashedPassword = await hashPassword(password);
 
     // Guardar el nuevo usuario en la base de datos
     return await createUserModel(username, email, hashedPassword);
   } catch (error) {
     console.error("Error en createUserService");
-    throw new CustomError("Error en Crear Usuario", 500);
+    if (error instanceof CustomError) {
+      throw error;
+    }
+    throw new CustomError("Error al crear el usuario", 500);
   }
 };
 
@@ -49,13 +47,16 @@ export const loginUserService = async (email: string, password: string) => {
     const isMatch = await comparePassword(password, user.password);
     if (isMatch) {
       const state = true;
-      await logoutUserModel(userId, state);
-      return user;
+      const userState = await logoutUserModel(userId, state);
+      return userState;
     }
 
     return null;
   } catch (error) {
     console.error("Error en loginUserService");
+    if (error instanceof CustomError) {
+      throw error;
+    }
     throw new CustomError("Error en el Login Usuario", 500);
   }
 };
@@ -73,6 +74,9 @@ export const logoutUserService = async (userId: string) => {
     return true;
   } catch (error) {
     console.error("Error en logoutUserService");
+    if (error instanceof CustomError) {
+      throw error;
+    }
     throw new CustomError("Error en el Logout Usuario", 500);
   }
 };

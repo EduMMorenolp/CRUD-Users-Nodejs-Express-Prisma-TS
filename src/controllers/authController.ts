@@ -15,15 +15,7 @@ export const registerUser = async (
 ) => {
   try {
     const { username, email, password } = req.body;
-    if (!username || !email || !password) {
-      throw new CustomError(
-        "Todos los campos son requeridos: username, email, password",
-        400
-      );
-    }
-
     const newUser = await createUserService(username, email, password);
-
     res.status(201).json({
       message: "Usuario creado exitosamente",
       user: newUser,
@@ -41,16 +33,13 @@ export const loginUserController = async (
 ): Promise<void> => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) {
-      throw new CustomError("Email y contraseña son requeridos", 400);
-    }
     // Autenticación del usuario
     const user = await loginUserService(email, password);
     if (!user) {
-      res.status(401).json({
-        message: "Credenciales inválidas",
-      });
-      return;
+      throw new CustomError(
+        "No se pudo iniciar sesión; el usuario no existe o ya estaba activo.",
+        404
+      );
     }
     const userId = user.id;
     const userRole = user.role;

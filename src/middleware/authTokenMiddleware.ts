@@ -15,25 +15,20 @@ export const authenticateToken = (
   next: NextFunction
 ) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
-
   if (!token) {
-    throw new CustomError("Acceso denegado. No se proporcionó un token.", 401); // Mensaje en español
+    throw new CustomError("Acceso denegado. No se proporcionó un token.", 401);
   }
-
   const decoded = verifyAuthToken(token);
   if (!decoded) {
     throw new CustomError("Token inválido", 400);
   }
-
   const { userId, userRol } = decoded as JwtPayload;
-
   if (!userId || !userRol) {
     throw new CustomError(
       "Token inválido. El payload no contiene los datos necesarios.",
       400
     );
   }
-
   req.userId = userId;
   req.userRol = userRol;
   next();

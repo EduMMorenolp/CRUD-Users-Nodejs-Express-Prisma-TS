@@ -65,25 +65,31 @@ export const updateUser = async (
     const { username, email, password } = req.body;
     const userId = req.userId;
     const userRole = req.userRol;
+
     if (userRole === "admin") {
       const updated = await updateUserService(id, username, email, password);
       if (!updated) {
-        throw new CustomError("Usuario no encontrado para actualizar", 404); // Error personalizado con código 404
+        throw new CustomError("Usuario no encontrado para actualizar", 404);
       }
       res.status(200).json({ message: "Usuario actualizado correctamente" });
     }
+
     if (id !== userId) {
       throw new CustomError(
         "No tienes permiso para actualizar este usuario.",
         403
-      ); // Error personalizado con código 403
+      );
     }
+
     // Realizar la actualización
     const updated = await updateUserService(id, username, email, password);
     if (!updated) {
-      throw new CustomError("Usuario no encontrado para actualizar", 404); // Error personalizado con código 404
+      throw new CustomError("Usuario no encontrado para actualizar", 404);
     }
-    res.status(200).json({ message: "Usuario actualizado correctamente" });
+
+    res
+      .status(200)
+      .json({ message: "Usuario actualizado correctamente", updated });
   } catch (error) {
     next(error);
   }

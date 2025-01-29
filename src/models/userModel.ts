@@ -42,14 +42,14 @@ export const logoutUserModel = async (userId: string, state: boolean) => {
       where: { id: userId },
     });
 
-    if (!user || user.isActive === state) return false;
+    if (!user || user.isActive === state) return null;
 
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: { isActive: state },
     });
 
-    return updatedUser ? true : false;
+    return updatedUser;
   } catch (error: any) {
     console.error("Error al actualizar el estado del usuario:", error.message);
     throw error;
@@ -104,26 +104,26 @@ export const getUserByIdModel = async (id: string) => {
 // Actualizar usuario
 export const updateUserModel = async (
   id: string,
-  username: string,
-  email: string,
-  passwordHash: string
+  username?: string,
+  email?: string, 
+  passwordHash?: string 
 ) => {
   try {
-    const existingUser = await prisma.user.findFirst({
-      where: { email, id: { not: id }, isDeleted: false },
-    });
-
-    if (existingUser) throw new Error("El correo electrónico ya está en uso.");
-
+    const dataToUpdate: any = {};
+    if (username) {
+      dataToUpdate.username = username;
+    }
+    if (email) {
+      dataToUpdate.email = email;
+    }
+    if (passwordHash) {
+      dataToUpdate.password = passwordHash;
+    }
     const updatedUser = await prisma.user.update({
       where: { id },
-      data: {
-        username,
-        email,
-        password: passwordHash,
-      },
+      data: dataToUpdate,
     });
-    return updatedUser ? true : false;
+    return updatedUser;
   } catch (error: any) {
     console.error("Error al actualizar el usuario:", error.message);
     throw error;
