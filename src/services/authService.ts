@@ -2,7 +2,7 @@ import {
   createUserModel,
   getUserByEmail,
   logoutUserModel,
-} from "../models/userModel.js";
+} from "../repositories/userRepository.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 // Importa la clase de error personalizado
 import { CustomError } from "../utils/CustomError.js";

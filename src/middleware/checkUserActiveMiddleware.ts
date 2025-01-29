@@ -1,4 +1,4 @@
-import { checkUserActive } from "../models/userModel.js";
+import { checkUserActive } from "../repositories/userRepository.js";
 import { CustomError } from "../utils/CustomError.js";
 import { NextFunction, Request, Response } from "express";
 

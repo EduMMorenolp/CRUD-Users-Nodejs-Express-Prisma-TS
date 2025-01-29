@@ -8,7 +8,7 @@ import {
 } from "../controllers/authController.js";
 import { authenticateToken } from "../middleware/authTokenMiddleware.js";
 
-import { validateUserLogin, validateUserRegister } from "../validation/auth.js";
+import { validateUserLogin, validateUserRegister } from "../validation/authValidate.js";
 
 import { handleValidationErrors } from "../middleware/handleValidationErrors.js";
 

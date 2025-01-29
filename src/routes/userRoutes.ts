@@ -14,7 +14,7 @@ import { authenticateToken } from "../middleware/authTokenMiddleware.js";
 import { verifyAdmin } from "../middleware/verifyAdmin.js";
 import { checkUserActiveMiddleware } from "../middleware/checkUserActiveMiddleware.js";
 
-import { validateUpdateUser } from "../validation/user.js";
+import { validateUpdateUser } from "../validation/userValidate.js";
 import { handleValidationErrors } from "../middleware/handleValidationErrors.js";
 
 const router = express.Router();

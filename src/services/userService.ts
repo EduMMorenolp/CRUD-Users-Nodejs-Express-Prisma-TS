@@ -6,7 +6,7 @@ import {
   getUserByIdModel,
   updateUserModel,
   restoreUserModel,
-} from "../models/userModel.js";
+} from "../repositories/userRepository.js";
 import { hashPassword } from "../utils/bcrypt.js";
 import { CustomError } from "../utils/CustomError.js";
 
