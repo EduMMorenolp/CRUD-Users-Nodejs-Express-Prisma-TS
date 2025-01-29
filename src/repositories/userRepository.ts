@@ -1,4 +1,4 @@
-// ./src/models/userModel.js
+// ./src/repositories/userRepository.js
 
 import prisma from "../config/prismaClient.js";
 
