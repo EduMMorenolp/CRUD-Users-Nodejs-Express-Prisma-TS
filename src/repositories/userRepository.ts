@@ -2,7 +2,7 @@
 
 import prisma from "../config/prismaClient.js";
 
-export const createUserModel = async (
+export const createUser = async (
   username: string,
   email: string,
   password: string
@@ -36,7 +36,7 @@ export const getUserByEmail = async (email: string) => {
 };
 
 // Cierre de sesion de Usuario
-export const logoutUserModel = async (userId: string, state: boolean) => {
+export const logoutUser = async (userId: string, state: boolean) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -74,7 +74,7 @@ export const checkUserActive = async (userId: string) => {
 };
 
 // Obtener todos los usuarios
-export const getAllUsersModel = async () => {
+export const getAllUsers = async () => {
   try {
     const users = await prisma.user.findMany({
       where: { isDeleted: false },
@@ -88,7 +88,7 @@ export const getAllUsersModel = async () => {
 };
 
 // Obtener usuario por ID
-export const getUserByIdModel = async (id: string) => {
+export const getUserById = async (id: string) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id },
@@ -102,7 +102,7 @@ export const getUserByIdModel = async (id: string) => {
 };
 
 // Actualizar usuario
-export const updateUserModel = async (
+export const updateUser = async (
   id: string,
   username?: string,
   email?: string, 
@@ -131,7 +131,7 @@ export const updateUserModel = async (
 };
 
 // Eliminar usuario
-export const deleteUserModel = async (id: string) => {
+export const deleteUser = async (id: string) => {
   try {
     const deletedUser = await prisma.user.update({
       where: { id },
@@ -145,7 +145,7 @@ export const deleteUserModel = async (id: string) => {
 };
 
 // Restaurar usuario
-export const restoreUserModel = async (id: string) => {
+export const restoreUser = async (id: string) => {
   try {
     const restoredUser = await prisma.user.update({
       where: { id },

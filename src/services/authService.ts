@@ -1,7 +1,7 @@
 import {
-  createUserModel,
+  createUser,
   getUserByEmail,
-  logoutUserModel,
+  logoutUser,
 } from "../repositories/userRepository.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 // Importa la clase de error personalizado
@@ -24,7 +24,7 @@ export const createUserService = async (
     const hashedPassword = await hashPassword(password);
 
     // Guardar el nuevo usuario en la base de datos
-    return await createUserModel(username, email, hashedPassword);
+    return await createUser(username, email, hashedPassword);
   } catch (error) {
     console.error("Error en createUserService");
     if (error instanceof CustomError) {
@@ -47,7 +47,7 @@ export const loginUserService = async (email: string, password: string) => {
     const isMatch = await comparePassword(password, user.password);
     if (isMatch) {
       const state = true;
-      const userState = await logoutUserModel(userId, state);
+      const userState = await logoutUser(userId, state);
       return userState;
     }
 
@@ -64,7 +64,7 @@ export const loginUserService = async (email: string, password: string) => {
 export const logoutUserService = async (userId: string) => {
   try {
     const state = false;
-    const success = await logoutUserModel(userId, state);
+    const success = await logoutUser(userId, state);
     if (!success) {
       throw new CustomError(
         "No se pudo cerrar sesión; el usuario no existe o ya estaba inactivo.",

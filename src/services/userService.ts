@@ -1,23 +1,23 @@
 // ./src/services/userService.js
 
 import {
-  deleteUserModel,
-  getAllUsersModel,
-  getUserByIdModel,
-  updateUserModel,
-  restoreUserModel,
+  deleteUser,
+  getAllUsers,
+  getUserById,
+  updateUser,
+  restoreUser,
 } from "../repositories/userRepository.js";
 import { hashPassword } from "../utils/bcrypt.js";
 import { CustomError } from "../utils/CustomError.js";
 
 // Obtener todos los usuarios
 export const getAllUsersService = async () => {
-  return await getAllUsersModel();
+  return await getAllUsers();
 };
 
 // Obtener usuario por ID
 export const getUserByIdService = async (id: string) => {
-  return await getUserByIdModel(id);
+  return await getUserById(id);
 };
 
 // Actualizar usuario
@@ -32,7 +32,7 @@ export const updateUserService = async (
     if (password) {
       passwordHash = await hashPassword(password);
     }
-    await updateUserModel(id, username, email, passwordHash);
+    await updateUser(id, username, email, passwordHash);
 
     const updatedUser = {
       id: id,
@@ -57,9 +57,9 @@ export const updateUserService = async (
 
 // Eliminar usuario
 export const deleteUserService = async (id: string) => {
-  return await deleteUserModel(id);
+  return await deleteUser(id);
 };
 
 export const restoreUserService = async (id: string) => {
-  return await restoreUserModel(id);
+  return await restoreUser(id);
 };
