@@ -60,7 +60,6 @@ Este proyecto es una API RESTful para gestionar usuarios, construida utilizando 
 
    # Configuración de JWT
    JWT_SECRET=yoursecretkey
-   JWT_EXPIRES_IN=1h
 
    # Configuracion de Swagger Server
    BASE_PATH=api
