@@ -2,16 +2,16 @@
 
 ## 📜 **Descripción**
 
-Este proyecto es una API RESTful para gestionar usuarios, construida utilizando Node.js, Express y TypeScript. Permite crear, leer, actualizar y eliminar usuarios con un enfoque en autenticación JWT, roles de usuario, y manejo de contraseñas mediante `bcryptjs`.
+Este proyecto es una API RESTful para gestionar usuarios, construida utilizando `Node.js`, `Express` y `TypeScript`. Permite crear, leer, actualizar y eliminar usuarios con un enfoque en autenticación JWT, roles de usuario, y manejo de contraseñas mediante `bcryptjs`.
 
 ## ✨ **Características**
 
-- **Autenticación JWT**: Utiliza JSON Web Tokens (JWT) para la autenticación de usuarios.
+- **Autenticación JWT**: Utiliza `JSON Web Tokens (JWT)` para la autenticación de usuarios.
 - **Roles de usuario**: Soporta roles de usuario, permitiendo la gestión de accesos con permisos específicos.
 - **Soft delete**: Implementa un sistema de eliminación lógica (soft delete) para los usuarios.
 - **Restauración de usuarios**: Permite restaurar usuarios eliminados lógicamente.
 - **Manejo de contraseñas**: Las contraseñas se cifran con `bcryptjs` para asegurar la seguridad de los datos.
-- **Swagger UI**: Documentación de la API accesible a través de Swagger.
+- **Swagger UI**: Documentación de la API accesible a través de `Swagger`.
 
 ## 🛠️ **Tecnologías utilizadas**
 
@@ -49,7 +49,7 @@ Este proyecto es una API RESTful para gestionar usuarios, construida utilizando 
    npm install
    ```
 
-4. Crea el archivo `.env` con las siguientes variables de entorno (puedes usar el [.env.example](#) como guia):
+4. Crea el archivo `.env` con las siguientes variables de entorno (puedes usar el `.env.example` como guia):
 
    ```env
    # Puerto del servidor
@@ -84,7 +84,7 @@ npm run start
 
 ## 📃 **Documentación API (Swagger UI)**
 
-Accede a la documentación interactiva de Swagger UI después de iniciar el servidor:
+Accede a la documentación interactiva de `Swagger UI` después de iniciar el servidor:
 
 ```bash
 ==================================================
