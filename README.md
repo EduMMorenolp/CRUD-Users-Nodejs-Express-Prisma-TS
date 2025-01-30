@@ -72,7 +72,7 @@ Este proyecto es una API RESTful para gestionar usuarios, construida utilizando 
 
 ```bash
 npx prisma migrate dev
-````
+```
 
 ## ⚡ **Ejecución**
 
@@ -92,6 +92,54 @@ Accede a la documentación interactiva de Swagger UI después de iniciar el serv
 📃 Swagger Docs: http://localhost:3000/api-docs
 ==================================================
 ```
+
+## 📌 API de Usuarios y Autenticación
+
+### 🔐 Autenticación (`/auth`)
+
+| Método   | Endpoint         | Descripción                |
+| -------- | ---------------- | -------------------------- |
+| **POST** | `/auth/register` | Registrar un nuevo usuario |
+| **POST** | `/auth/login`    | Iniciar sesión             |
+| **POST** | `/auth/logout`   | Cerrar sesión              |
+
+### 👤 Usuarios (`/users`)
+
+| Método     | Endpoint              | Descripción                        |
+| ---------- | --------------------- | ---------------------------------- |
+| **GET**    | `/users`              | Obtener todos los usuarios         |
+| **GET**    | `/users/{id}`         | Obtener usuario por ID             |
+| **PUT**    | `/users/update/{id}`  | Actualizar usuario                 |
+| **DELETE** | `/users/delete/{id}`  | Eliminar usuario (borrado lógico)  |
+| **PUT**    | `/users/restore/{id}` | Restaurar usuario (borrado lógico) |
+
+---
+---
+
+## 📌 Nuevas Rutas Recomendadas a implementar
+
+###  🔐 Autenticación (`/auth`)
+| Método  | Endpoint                 | Descripción |
+|---------|--------------------------|-------------|
+| **POST**  | `/auth/refresh-token`     | Generar nuevo token de acceso |
+| **POST**  | `/auth/change-password`   | Cambiar contraseña autenticado |
+| **POST**  | `/auth/reset-password`    | Solicitar recuperación de contraseña |
+| **POST**  | `/auth/verify-email`      | Verificar email del usuario |
+
+### 👤 Usuarios (`/users`)
+| Método  | Endpoint                   | Descripción |
+|---------|----------------------------|-------------|
+| **GET**   | `/users/me`                | Obtener perfil autenticado |
+| **PATCH** | `/users/update-profile`    | Actualizar perfil autenticado |
+| **PATCH** | `/users/update-role/{id}`  | Cambiar rol de usuario (admin) |
+| **GET**   | `/users/search`            | Buscar usuarios con filtros |
+
+### ⚙️ Utilidades
+| Método  | Endpoint   | Descripción |
+|---------|-----------|-------------|
+| **GET**  | `/health`  | Verificar estado de la API |
+| **GET**  | `/docs`    | Documentación de la API |
+
 
 ## 📝 **Licencia**
 
