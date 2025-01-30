@@ -1,23 +1,51 @@
 // @ts-ignore
-import { body } from "express-validator";
+import { body, checkExact } from "express-validator";
 
 export const validateUpdateUser = [
   body("username")
     .optional()
+    .trim()
+    .escape()
     .notEmpty()
     .withMessage("El nombre de usuario es obligatorio.")
-    .isLength({ min: 3 })
-    .withMessage("El nombre de usuario debe tener al menos 3 caracteres."),
+    .isLength({ min: 3, max: 30 })
+    .withMessage("El nombre de usuario debe tener entre 3 y 30 caracteres.")
+    .matches(/^[\w]+$/)
+    .withMessage(
+      "El nombre de usuario solo puede contener letras, números y guiones bajos."
+    ),
+
   body("password")
     .optional()
+    .trim()
     .notEmpty()
     .withMessage("La contraseña no puede estar vacía.")
-    .isLength({ min: 6 })
-    .withMessage("La contraseña debe tener al menos 6 caracteres."),
+    .isLength({ min: 8, max: 100 })
+    .withMessage("La contraseña debe tener entre 8 y 100 caracteres.")
+    .matches(/[A-Z]/)
+    .withMessage("La contraseña debe contener al menos una mayúscula.")
+    .matches(/[a-z]/)
+    .withMessage("La contraseña debe contener al menos una minúscula.")
+    .matches(/[0-9]/)
+    .withMessage("La contraseña debe contener al menos un número.")
+    .matches(/[\W_]/)
+    .withMessage("La contraseña debe contener al menos un carácter especial.")
+    .not()
+    .matches(/^$|\s+/)
+    .withMessage("La contraseña no puede contener espacios en blanco."),
+
   body("email")
     .optional()
+    .trim()
+    .normalizeEmail()
     .notEmpty()
     .withMessage("El correo electrónico no puede estar vacío.")
     .isEmail()
-    .withMessage("El correo electrónico debe tener un formato válido."),
+    .withMessage("El correo electrónico debe tener un formato válido.")
+    .isLength({ max: 255 })
+    .withMessage("El correo electrónico no puede exceder los 255 caracteres."),
+
+  checkExact([], {
+    message: "Campos adicionales no permitidos.",
+  }),
 ];
