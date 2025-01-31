@@ -4,11 +4,17 @@ import { validationResult } from "express-validator";
 
 import { CustomError } from "../utils/CustomError";
 
+/**
+ * Manejador de errores
+ * @param err 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 export const errorHandler = (
   err: CustomError,
   req: Request,
   res: Response,
-  next: NextFunction
 ): void => {
   const statusCode = err.statusCode || 500;
   const message = err.statusCode ? err.message : "Internal server error";
@@ -19,6 +25,12 @@ export const errorHandler = (
   });
 };
 
+/**
+ * Manejador de errores de validación
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 export const handleValidationErrors = (
   req: Request,
   res: Response,

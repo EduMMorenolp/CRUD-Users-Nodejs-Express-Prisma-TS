@@ -1,6 +1,10 @@
-// types/express.d.ts
+// src/types/express.d.ts
+
 import { Request } from "express";
 
+/**
+ * Extiende la interfaz Request de Express para añadir propiedades
+ */
 declare global {
   namespace Express {
     interface Request {

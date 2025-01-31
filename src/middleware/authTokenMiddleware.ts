@@ -9,6 +9,12 @@ interface JwtPayload {
   userRol: string;
 }
 
+/**
+ * Middleware para autenticar el token
+ * @param req
+ * @param res
+ * @param next
+ */
 export const authenticateToken = (
   req: Request,
   res: Response,

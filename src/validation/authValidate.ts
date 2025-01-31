@@ -1,6 +1,9 @@
 // @ts-ignore
 import { body, checkExact } from "express-validator";
 
+/**
+ * Validaciones para el registro de usuarios
+ */
 export const validateUserRegister = [
   body("username")
     .trim()
@@ -44,6 +47,9 @@ export const validateUserRegister = [
   }),
 ];
 
+/**
+ * Validaciones para el inicio de sesión de usuarios
+ */
 export const validateUserLogin = [
   body("email")
     .trim()

@@ -1,6 +1,9 @@
 // @ts-ignore
 import { body, checkExact } from "express-validator";
 
+/**
+ * Validaciones para el Update de usuarios
+ */
 export const validateUpdateUser = [
   body("username")
     .optional()

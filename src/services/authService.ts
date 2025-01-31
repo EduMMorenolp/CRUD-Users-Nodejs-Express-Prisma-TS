@@ -1,32 +1,47 @@
+// ./src/services/authService.js
+
 import {
   createUser,
   getUserByEmail,
   logoutUser,
 } from "../repositories/userRepository.js";
+// Importa las funciones de cifrado y comparación de contraseñas
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 // Importa la clase de error personalizado
 import { CustomError } from "../utils/CustomError.js";
+// Importa la función para generar el token JWT
 import { generateAuthToken } from "../utils/jwt.js";
 
-// Crear un nuevo usuario
+/**
+ * Crear un nuevo usuario
+ * @param username 
+ * @param email 
+ * @param password 
+ * @returns 
+ */
 export const createUserService = async (
   username: string,
   email: string,
   password: string
 ) => {
-    // Verificar el email
-    const existingUser = await getUserByEmail(email);
-    if (existingUser) {
-      throw new CustomError("El correo electrónico ya está en uso", 409);
-    }
-    // Cifrar la contraseña
-    const hashedPassword = await hashPassword(password);
+  // Verificar el email
+  const existingUser = await getUserByEmail(email);
+  if (existingUser) {
+    throw new CustomError("El correo electrónico ya está en uso", 409);
+  }
+  // Cifrar la contraseña
+  const hashedPassword = await hashPassword(password);
 
-    // Guardar el nuevo usuario en la base de datos
-    return await createUser(username, email, hashedPassword);
+  // Guardar el nuevo usuario en la base de datos
+  return await createUser(username, email, hashedPassword);
 };
 
-// Iniciar sesión de un usuario
+/**
+ * Iniciar sesión de un usuario
+ * @param email 
+ * @param password 
+ * @returns 
+ */
 export const loginUserService = async (email: string, password: string) => {
   const user = await getUserByEmail(email);
   if (!user) {
@@ -61,7 +76,12 @@ export const logoutUserService = async (userId: string) => {
   return true;
 };
 
-// Generar el token JWT (ya no es necesario redefinir la función)
+/**
+ * Generar el token JWT (ya no es necesario redefinir la función)
+ * @param userId 
+ * @param role 
+ * @returns 
+ */
 export const generateAuthTokenForUser = (userId: string, role: string) => {
   return generateAuthToken(userId, role);
 };

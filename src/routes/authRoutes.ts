@@ -1,4 +1,4 @@
-//
+// src/routes/authRoutes.ts
 
 import express from "express";
 import {
@@ -13,9 +13,11 @@ import { validateUserLogin, validateUserRegister } from "../validation/authValid
 import { handleValidationErrors } from "../middleware/errorHandler.js";
 
 // Middlewares
-
 const router = express.Router();
 
+/**
+ * Rutas de autenticación
+ */
 router.post(
   "/register",
   validateUserRegister,

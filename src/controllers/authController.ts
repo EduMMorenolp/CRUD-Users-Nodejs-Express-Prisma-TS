@@ -8,6 +8,9 @@ import {
 
 import { CustomError } from "../utils/CustomError.js";
 
+/**
+ * Controlador de nuevo usuario
+ */
 export const registerUser = async (
   req: Request,
   res: Response,
@@ -25,7 +28,9 @@ export const registerUser = async (
   }
 };
 
-// Controlador de login
+/**
+ * Controlador de login
+ */
 export const loginUserController = async (
   req: Request,
   res: Response,
@@ -63,7 +68,9 @@ export const loginUserController = async (
   }
 };
 
-// Controlador de logout
+/**
+ * Controlador de logout
+ */
 export const logoutUserController = async (
   req: Request,
   res: Response,

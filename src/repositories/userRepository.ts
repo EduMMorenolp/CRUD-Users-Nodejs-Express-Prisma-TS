@@ -2,6 +2,13 @@
 
 import prisma from "../config/prismaClient.js";
 
+/**
+ * Crear Usuario
+ * @param username 
+ * @param email 
+ * @param password 
+ * @returns 
+ */
 export const createUser = async (
   username: string,
   email: string,
@@ -22,7 +29,11 @@ export const createUser = async (
   }
 };
 
-// Obtener email de Usuario
+/**
+ * Obtener email de Usuario
+ * @param email 
+ * @returns 
+ */
 export const getUserByEmail = async (email: string) => {
   try {
     const user = await prisma.user.findUnique({
@@ -35,7 +46,12 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
-// Cierre de sesion de Usuario
+/**
+ * Cierre de sesion de Usuario
+ * @param userId 
+ * @param state 
+ * @returns 
+ */
 export const logoutUser = async (userId: string, state: boolean) => {
   try {
     const user = await prisma.user.findUnique({
@@ -53,7 +69,11 @@ export const logoutUser = async (userId: string, state: boolean) => {
   }
 };
 
-// Verificar si el usuario está activo
+/**
+ * Verificar si el usuario está activo
+ * @param userId 
+ * @returns 
+ */
 export const checkUserActive = async (userId: string) => {
   try {
     const user = await prisma.user.findUnique({
@@ -70,7 +90,10 @@ export const checkUserActive = async (userId: string) => {
   }
 };
 
-// Obtener todos los usuarios
+/**
+ * Obtener todos los usuarios
+ * @returns 
+ */
 export const getAllUsers = async () => {
   try {
     const users = await prisma.user.findMany({
@@ -84,7 +107,11 @@ export const getAllUsers = async () => {
   }
 };
 
-// Obtener usuario por ID
+/**
+ * Obtener usuario por ID
+ * @param id 
+ * @returns 
+ */
 export const getUserById = async (id: string) => {
   try {
     const user = await prisma.user.findUnique({
@@ -97,7 +124,14 @@ export const getUserById = async (id: string) => {
   }
 };
 
-// Actualizar usuario
+/**
+ * Actualizar usuario
+ * @param id 
+ * @param username 
+ * @param email 
+ * @param passwordHash 
+ * @returns 
+ */
 export const updateUser = async (
   id: string,
   username?: string,
@@ -126,7 +160,11 @@ export const updateUser = async (
   }
 };
 
-// Eliminar usuario
+/**
+ * Eliminar usuario
+ * @param id 
+ * @returns 
+ */
 export const deleteUser = async (id: string) => {
   try {
     const deletedUser = await prisma.user.update({
@@ -140,7 +178,11 @@ export const deleteUser = async (id: string) => {
   }
 };
 
-// Restaurar usuario
+/**
+ * Restaurar usuario
+ * @param id 
+ * @returns 
+ */
 export const restoreUser = async (id: string) => {
   try {
     const restoredUser = await prisma.user.update({

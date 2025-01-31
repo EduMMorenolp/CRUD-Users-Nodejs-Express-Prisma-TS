@@ -10,12 +10,19 @@ import {
 import { hashPassword } from "../utils/bcrypt.js";
 import { CustomError } from "../utils/CustomError.js";
 
-// Obtener todos los usuarios
+/**
+ * Obtener todos los usuarios
+ * @returns 
+ */
 export const getAllUsersService = async () => {
   return await getAllUsers();
 };
 
-// Obtener usuario por ID
+/**
+ * Obtener usuario por ID
+ * @param id 
+ * @returns 
+ */
 export const getUserByIdService = async (id: string) => {
   const user = await getUserById(id);
   if (!user) {
@@ -24,7 +31,14 @@ export const getUserByIdService = async (id: string) => {
   return user;
 };
 
-// Actualizar usuario
+/**
+ * Actualizar usuario
+ * @param id 
+ * @param username 
+ * @param email 
+ * @param password 
+ * @returns 
+ */
 export const updateUserService = async (
   id: string,
   username?: string,
@@ -49,12 +63,21 @@ export const updateUserService = async (
   return updatedUser;
 };
 
-// Eliminar usuario
+/**
+ * Eliminar usuario
+ * @param id 
+ * @returns 
+ */
 export const deleteUserService = async (id: string) => {
   await getUserByIdService(id);
   return await deleteUser(id);
 };
 
+/**
+ * Restaurar usuario
+ * @param id 
+ * @returns 
+ */
 export const restoreUserService = async (id: string) => {
   const user = await getUserByIdService(id);
   if (user.isActive) {

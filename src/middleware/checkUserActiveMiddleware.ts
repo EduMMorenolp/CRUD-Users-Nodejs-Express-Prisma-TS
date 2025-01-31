@@ -2,7 +2,12 @@ import { checkUserActive } from "../repositories/userRepository.js";
 import { CustomError } from "../utils/CustomError.js";
 import { NextFunction, Request, Response } from "express";
 
-// Verificar si el usuario está activo
+/**
+ * Verificar si el usuario está activo
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 export const checkUserActiveMiddleware = async (
   req: Request,
   res: Response,

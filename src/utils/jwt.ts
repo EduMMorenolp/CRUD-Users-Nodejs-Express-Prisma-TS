@@ -5,7 +5,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// Generar el token JWT
+/**
+ * Generar el token JWT
+ * @param userId
+ * @param userRol
+ * @returns
+ */
 export const generateAuthToken = (userId: string, userRol: string) => {
   const payload = { userId, userRol };
   const jwtSecret = process.env.JWT_SECRET;
@@ -16,7 +21,11 @@ export const generateAuthToken = (userId: string, userRol: string) => {
   return token;
 };
 
-// Verificar el token JWT
+/**
+ * Verificar el token JWT
+ * @param token
+ * @returns
+ */
 export const verifyAuthToken = (token: string) => {
   try {
     const jwtSecret = process.env.JWT_SECRET;

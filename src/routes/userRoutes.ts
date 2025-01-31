@@ -19,6 +19,9 @@ import { handleValidationErrors } from "../middleware/errorHandler.js";
 
 const router = express.Router();
 
+/**
+ * Rutas de usuarios
+ */
 router.get(
   "/",
   authenticateToken,
