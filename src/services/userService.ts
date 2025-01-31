@@ -19,10 +19,7 @@ export const getAllUsersService = async () => {
 export const getUserByIdService = async (id: string) => {
   const user = await getUserById(id);
   if (!user) {
-    throw new CustomError(
-      "El usuario no existe.",
-      404
-    );
+    throw new CustomError("El usuario no existe.", 404);
   }
   return user;
 };
@@ -34,29 +31,22 @@ export const updateUserService = async (
   email?: string,
   password?: string
 ) => {
-  try {
-    let passwordHash = undefined;
-    if (password) {
-      passwordHash = await hashPassword(password);
-    }
-    await updateUser(id, username, email, passwordHash);
+  await getUserByIdService(id);
 
-    const updatedUser = {
-      id: id,
-      username: username,
-      email: email,
-      password: password,
-    };
-
-    if (!updatedUser) {
-      throw new CustomError("No se pudo actualizar el usuario.", 404);
-    }
-
-    return updatedUser;
-  } catch (error) {
-    console.error("Error en updateUserService:", error);
-    throw new CustomError("Error al actualizar el usuario", 500);
+  let passwordHash = undefined;
+  if (password) {
+    passwordHash = await hashPassword(password);
   }
+  await updateUser(id, username, email, passwordHash);
+
+  const updatedUser = {
+    id: id,
+    username: username,
+    email: email,
+    password: "********",
+  };
+
+  return updatedUser;
 };
 
 // Eliminar usuario
@@ -67,7 +57,7 @@ export const deleteUserService = async (id: string) => {
 
 export const restoreUserService = async (id: string) => {
   const user = await getUserByIdService(id);
-  if (user.isActive){
+  if (user.isActive) {
     throw new CustomError("El usuario ya está activo.", 400);
   }
   return await restoreUser(id);

@@ -1,4 +1,4 @@
-// src/controllers/userController.ts 
+// src/controllers/userController.ts
 
 import { Request, Response, NextFunction } from "express";
 // Importar las funciones de los servicios
@@ -44,7 +44,7 @@ export const getUserById = async (
     const userId = req.userId;
     const userRole = req.userRol;
 
-    if (userRole === "admin") {
+    if (userRole === "admin" || id == userId) {
       const user = await getUserByIdService(id);
       const userData = {
         id: user.id,
@@ -57,24 +57,9 @@ export const getUserById = async (
         updatedAt: user.updatedAt,
       };
       res.status(200).json(userData);
-    }
-
-    if (id !== userId) {
+    } else {
       throw new CustomError("No tienes permiso para ver este usuario.", 403);
     }
-
-    const user = await getUserByIdService(id);
-    const userData = {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      role: user.role,
-      isAcitve: user.isActive,
-      isDeleted: user.isDeleted,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    };
-    res.status(200).json(userData);
   } catch (error) {
     next(error);
   }
@@ -94,30 +79,18 @@ export const updateUser = async (
     const userId = req.userId;
     const userRole = req.userRol;
 
-    if (userRole === "admin") {
+    if (userRole === "admin" || id == userId) {
       const updated = await updateUserService(id, username, email, password);
       if (!updated) {
         throw new CustomError("Usuario no encontrado para actualizar", 404);
       }
-      res.status(200).json({ message: "Usuario actualizado correctamente" });
-    }
-
-    if (id !== userId) {
+      res.status(200).json({ message: "Campos Actualizados", updated });
+    } else {
       throw new CustomError(
         "No tienes permiso para actualizar este usuario.",
         403
       );
     }
-
-    // Realizar la actualización
-    const updated = await updateUserService(id, username, email, password);
-    if (!updated) {
-      throw new CustomError("Usuario no encontrado para actualizar", 404);
-    }
-
-    res
-      .status(200)
-      .json({ message: "Usuario actualizado correctamente", updated });
   } catch (error) {
     next(error);
   }
@@ -136,26 +109,19 @@ export const deleteUser = async (
     const userId = req.userId;
     const userRole = req.userRol;
     // Verificar si el id en la URL coincide con el userId del token
-    if (userRole === "admin") {
+    if (userRole === "admin" || id == userId) {
       const deleted = await deleteUserService(id);
       if (!deleted) {
         throw new CustomError("Usuario no encontrado para eliminar", 404);
         404;
       }
       res.status(200).json({ message: "Usuario eliminado correctamente" });
-    }
-
-    if (id !== userId) {
+    } else {
       throw new CustomError(
         "No tienes permiso para eliminar este usuario.",
         403
-      ); // Error personalizado con código 403
+      );
     }
-    const deleted = await deleteUserService(id);
-    if (!deleted) {
-      throw new CustomError("Usuario no encontrado para eliminar", 404);
-    }
-    res.status(200).json({ message: "Usuario eliminado correctamente" });
   } catch (error) {
     next(error);
   }
