@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import { errorHandler } from './middleware/errorHandler.js';
 
 // Import Routes
+import adminRoutes from './routes/adminRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 
@@ -27,6 +28,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 // Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/admin', adminRoutes);
 
 // Middleware para manejar errores
 app.use(errorHandler);

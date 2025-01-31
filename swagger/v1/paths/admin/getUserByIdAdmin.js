@@ -2,10 +2,10 @@ import User from "../../components/schemas/user/User.js";
 
 const getUserById = {
   get: {
-    tags: ["Usuarios"],
-    summary: "Obtener datos de usuario",
+    tags: ["Admin"],
+    summary: "Obtener usuario por ID",
     description:
-      "Recupera al usuario por su ID. Asegúrate de que no esté eliminado (borrado lógico).",
+      "Recupera un usuario por su ID..",
     security: [
       {
         BearerAuth: [],

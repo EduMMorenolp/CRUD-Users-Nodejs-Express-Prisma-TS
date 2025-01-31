@@ -16,6 +16,13 @@ import updateUser from "./paths/user/updateUser.js";
 import deleteUser from "./paths/user/deleteUser.js";
 import restoreUser from "./paths/user/restoreUser.js";
 
+// Admin
+import getAllUsersAdmin from "./paths/admin/getAllUsersAdmin.js";
+import getUserByIdAdmin from "./paths/admin/getUserByIdAdmin.js";
+import updateUserAdmin from "./paths/admin/updateUserAdmin.js";
+import deleteUserAdmin from "./paths/admin/deleteUserAdmin.js";
+import restoreUserAdmin from "./paths/admin/restoreUserAdmin.js";
+
 const swaggerSpec = {
   openapi: "3.0.0",
   info,
@@ -25,12 +32,16 @@ const swaggerSpec = {
     "/auth/register": UserRegisterP,
     "/auth/login": UserLoginP,
     "/auth/logout": logoutUser,
+    // Admin
+    "/admin/allusers": getAllUsersAdmin,
+    "/admin/users/{id}": getUserByIdAdmin,
+    "/admin/users/update/{id}": updateUserAdmin,
+    "/admin/users/delete/{id}": deleteUserAdmin,
+    "/admin/users/restore/{id}": restoreUserAdmin,
     // Users
-    "/users": getAllUsers,
-    "/users/{id}": getUserById,
-    "/users/update/{id}": updateUser,
-    "/users/delete/{id}": deleteUser,
-    "/users/restore/{id}": restoreUser,
+    "/users/me": getUserById,
+    "/users/update/me": updateUser,
+    "/users/delete/me": deleteUser,
   },
   components: {
     schemas: {
