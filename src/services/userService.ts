@@ -2,21 +2,11 @@
 
 import {
   deleteUser,
-  getAllUsers,
   getUserById,
   updateUser,
-  restoreUser,
 } from "../repositories/userRepository.js";
 import { hashPassword } from "../utils/bcrypt.js";
 import { CustomError } from "../utils/CustomError.js";
-
-/**
- * Obtener todos los usuarios
- * @returns 
- */
-export const getAllUsersService = async () => {
-  return await getAllUsers();
-};
 
 /**
  * Obtener usuario por ID
@@ -71,17 +61,4 @@ export const updateUserService = async (
 export const deleteUserService = async (id: string) => {
   await getUserByIdService(id);
   return await deleteUser(id);
-};
-
-/**
- * Restaurar usuario
- * @param id 
- * @returns 
- */
-export const restoreUserService = async (id: string) => {
-  const user = await getUserByIdService(id);
-  if (user.isActive) {
-    throw new CustomError("El usuario ya está activo.", 400);
-  }
-  return await restoreUser(id);
 };

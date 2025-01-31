@@ -39,9 +39,9 @@ const swaggerSpec = {
     "/admin/users/delete/{id}": deleteUserAdmin,
     "/admin/users/restore/{id}": restoreUserAdmin,
     // Users
-    "/users/me": getUserById,
-    "/users/update/me": updateUser,
-    "/users/delete/me": deleteUser,
+    "/user": getUserById,
+    "/user/update": updateUser,
+    "/user/delete": deleteUser,
   },
   components: {
     schemas: {

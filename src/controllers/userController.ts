@@ -4,29 +4,12 @@ import { Request, Response, NextFunction } from "express";
 // Importar las funciones de los servicios
 import {
   deleteUserService,
-  getAllUsersService,
   getUserByIdService,
   updateUserService,
-  restoreUserService,
 } from "../services/userService.js";
 // Importar la clase de error personalizado
 import { CustomError } from "../utils/CustomError.js";
 
-/**
- * Obtener todos los usuarios
- */
-export const getAllUsers = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const users = await getAllUsersService();
-    res.status(200).json(users);
-  } catch (error) {
-    next(error);
-  }
-};
 
 /**
  * Obtener usuario por ID
@@ -37,15 +20,9 @@ export const getUserById = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { id } = req.params;
-    if (!id) {
-      throw new CustomError("ID de usuario no proporcionado", 400);
-    }
     const userId = req.userId;
-    const userRole = req.userRol;
-
-    if (userRole === "admin" || id == userId) {
-      const user = await getUserByIdService(id);
+    if (userId) {
+      const user = await getUserByIdService(userId);
       const userData = {
         id: user.id,
         username: user.username,
@@ -74,13 +51,15 @@ export const updateUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { id } = req.params;
     const { username, email, password } = req.body;
     const userId = req.userId;
-    const userRole = req.userRol;
-
-    if (userRole === "admin" || id == userId) {
-      const updated = await updateUserService(id, username, email, password);
+    if (userId) {
+      const updated = await updateUserService(
+        userId,
+        username,
+        email,
+        password
+      );
       if (!updated) {
         throw new CustomError("Usuario no encontrado para actualizar", 404);
       }
@@ -105,12 +84,9 @@ export const deleteUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { id } = req.params;
     const userId = req.userId;
-    const userRole = req.userRol;
-    // Verificar si el id en la URL coincide con el userId del token
-    if (userRole === "admin" || id == userId) {
-      const deleted = await deleteUserService(id);
+    if (userId) {
+      const deleted = await deleteUserService(userId);
       if (!deleted) {
         throw new CustomError("Usuario no encontrado para eliminar", 404);
         404;
@@ -122,23 +98,6 @@ export const deleteUser = async (
         403
       );
     }
-  } catch (error) {
-    next(error);
-  }
-};
-
-/**
- * Restaurar usuario
- */
-export const restoreUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  try {
-    const { id } = req.params;
-    await restoreUserService(id);
-    res.status(200).json({ message: "Usuario restaurado correctamente" });
   } catch (error) {
     next(error);
   }

@@ -4,10 +4,10 @@ import prisma from "../config/prismaClient.js";
 
 /**
  * Crear Usuario
- * @param username 
- * @param email 
- * @param password 
- * @returns 
+ * @param username
+ * @param email
+ * @param password
+ * @returns
  */
 export const createUser = async (
   username: string,
@@ -31,8 +31,8 @@ export const createUser = async (
 
 /**
  * Obtener email de Usuario
- * @param email 
- * @returns 
+ * @param email
+ * @returns
  */
 export const getUserByEmail = async (email: string) => {
   try {
@@ -48,9 +48,9 @@ export const getUserByEmail = async (email: string) => {
 
 /**
  * Cierre de sesion de Usuario
- * @param userId 
- * @param state 
- * @returns 
+ * @param userId
+ * @param state
+ * @returns
  */
 export const logoutUser = async (userId: string, state: boolean) => {
   try {
@@ -71,8 +71,8 @@ export const logoutUser = async (userId: string, state: boolean) => {
 
 /**
  * Verificar si el usuario está activo
- * @param userId 
- * @returns 
+ * @param userId
+ * @returns
  */
 export const checkUserActive = async (userId: string) => {
   try {
@@ -92,13 +92,20 @@ export const checkUserActive = async (userId: string) => {
 
 /**
  * Obtener todos los usuarios
- * @returns 
+ * @returns
  */
 export const getAllUsers = async () => {
   try {
     const users = await prisma.user.findMany({
-      where: { isDeleted: false },
-      select: { id: true, username: true, email: true },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        isActive: true,
+        role: true,
+        isDeleted: true,
+        createdAt: true,
+      },
     });
     return users;
   } catch (error: any) {
@@ -109,8 +116,8 @@ export const getAllUsers = async () => {
 
 /**
  * Obtener usuario por ID
- * @param id 
- * @returns 
+ * @param id
+ * @returns
  */
 export const getUserById = async (id: string) => {
   try {
@@ -126,17 +133,17 @@ export const getUserById = async (id: string) => {
 
 /**
  * Actualizar usuario
- * @param id 
- * @param username 
- * @param email 
- * @param passwordHash 
- * @returns 
+ * @param id
+ * @param username
+ * @param email
+ * @param passwordHash
+ * @returns
  */
 export const updateUser = async (
   id: string,
   username?: string,
-  email?: string, 
-  passwordHash?: string 
+  email?: string,
+  passwordHash?: string
 ) => {
   try {
     const dataToUpdate: any = {};
@@ -162,8 +169,8 @@ export const updateUser = async (
 
 /**
  * Eliminar usuario
- * @param id 
- * @returns 
+ * @param id
+ * @returns
  */
 export const deleteUser = async (id: string) => {
   try {
@@ -180,8 +187,8 @@ export const deleteUser = async (id: string) => {
 
 /**
  * Restaurar usuario
- * @param id 
- * @returns 
+ * @param id
+ * @returns
  */
 export const restoreUser = async (id: string) => {
   try {

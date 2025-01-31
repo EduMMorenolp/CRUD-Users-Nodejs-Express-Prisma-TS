@@ -8,7 +8,7 @@ import {
   getUserByIdService,
   updateUserService,
   restoreUserService,
-} from "../services/userService.js";
+} from "../services/adminService.js";
 // Importar la clase de error personalizado
 import { CustomError } from "../utils/CustomError.js";
 
