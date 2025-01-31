@@ -2,10 +2,10 @@
   "name": "crud-users-nodejs-express-prisma-ts",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node ./dist/server.js",
-    "devtsc": "tsc --watch",
-    "dev": "node --watch ./dist/server.js",
+    "start": "node --watch ./dist/server.js",
+    "dev": "tsc --watch",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

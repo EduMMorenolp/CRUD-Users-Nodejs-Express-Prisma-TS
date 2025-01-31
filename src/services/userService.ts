@@ -17,7 +17,14 @@ export const getAllUsersService = async () => {
 
 // Obtener usuario por ID
 export const getUserByIdService = async (id: string) => {
-  return await getUserById(id);
+  const user = await getUserById(id);
+  if (!user) {
+    throw new CustomError(
+      "El usuario no existe.",
+      404
+    );
+  }
+  return user;
 };
 
 // Actualizar usuario
@@ -48,18 +55,20 @@ export const updateUserService = async (
     return updatedUser;
   } catch (error) {
     console.error("Error en updateUserService:", error);
-    if (error instanceof CustomError) {
-      throw error;
-    }
     throw new CustomError("Error al actualizar el usuario", 500);
   }
 };
 
 // Eliminar usuario
 export const deleteUserService = async (id: string) => {
+  await getUserByIdService(id);
   return await deleteUser(id);
 };
 
 export const restoreUserService = async (id: string) => {
+  const user = await getUserByIdService(id);
+  if (user.isActive){
+    throw new CustomError("El usuario ya está activo.", 400);
+  }
   return await restoreUser(id);
 };

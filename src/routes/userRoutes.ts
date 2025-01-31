@@ -15,7 +15,7 @@ import { verifyAdmin } from "../middleware/verifyAdmin.js";
 import { checkUserActiveMiddleware } from "../middleware/checkUserActiveMiddleware.js";
 
 import { validateUpdateUser } from "../validation/userValidate.js";
-import { handleValidationErrors } from "../middleware/handleValidationErrors.js";
+import { handleValidationErrors } from "../middleware/errorHandler.js";
 
 const router = express.Router();
 

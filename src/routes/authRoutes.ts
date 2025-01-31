@@ -10,7 +10,7 @@ import { authenticateToken } from "../middleware/authTokenMiddleware.js";
 
 import { validateUserLogin, validateUserRegister } from "../validation/authValidate.js";
 
-import { handleValidationErrors } from "../middleware/handleValidationErrors.js";
+import { handleValidationErrors } from "../middleware/errorHandler.js";
 
 // Middlewares
 

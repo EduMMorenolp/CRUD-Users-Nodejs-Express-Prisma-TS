@@ -1,3 +1,7 @@
+// src/controllers/userController.ts 
+
+import { Request, Response, NextFunction } from "express";
+// Importar las funciones de los servicios
 import {
   deleteUserService,
   getAllUsersService,
@@ -5,9 +9,12 @@ import {
   updateUserService,
   restoreUserService,
 } from "../services/userService.js";
-import { CustomError } from "../utils/CustomError.js"; // Asegúrate de importar la clase CustomError
-import { Request, Response, NextFunction } from "express";
-// Obtener todos los usuarios
+// Importar la clase de error personalizado
+import { CustomError } from "../utils/CustomError.js";
+
+/**
+ * Obtener todos los usuarios
+ */
 export const getAllUsers = async (
   req: Request,
   res: Response,
@@ -21,7 +28,9 @@ export const getAllUsers = async (
   }
 };
 
-// Obtener usuario por ID
+/**
+ * Obtener usuario por ID
+ */
 export const getUserById = async (
   req: Request,
   res: Response,
@@ -34,27 +43,46 @@ export const getUserById = async (
     }
     const userId = req.userId;
     const userRole = req.userRol;
+
     if (userRole === "admin") {
       const user = await getUserByIdService(id);
-      if (!user) {
-        throw new CustomError("Usuario no encontrado", 404); // Error personalizado con código 404
-      }
-      res.status(200).json(user);
+      const userData = {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        isAcitve: user.isActive,
+        isDeleted: user.isDeleted,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      };
+      res.status(200).json(userData);
     }
+
     if (id !== userId) {
-      throw new CustomError("No tienes permiso para ver este usuario.", 403); // Error personalizado con código 403
+      throw new CustomError("No tienes permiso para ver este usuario.", 403);
     }
+
     const user = await getUserByIdService(id);
-    if (!user) {
-      throw new CustomError("Usuario no encontrado", 404); // Error personalizado con código 404
-    }
-    res.status(200).json(user);
+    const userData = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      role: user.role,
+      isAcitve: user.isActive,
+      isDeleted: user.isDeleted,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
+    res.status(200).json(userData);
   } catch (error) {
     next(error);
   }
 };
 
-// Actualizar usuario
+/**
+ * Actualizar usuario
+ */
 export const updateUser = async (
   req: Request,
   res: Response,
@@ -95,7 +123,9 @@ export const updateUser = async (
   }
 };
 
-// Eliminar usuario
+/**
+ * Eliminar usuario
+ */
 export const deleteUser = async (
   req: Request,
   res: Response,
@@ -109,7 +139,8 @@ export const deleteUser = async (
     if (userRole === "admin") {
       const deleted = await deleteUserService(id);
       if (!deleted) {
-        throw new CustomError("Usuario no encontrado para eliminar", 404); // Error personalizado con código 404
+        throw new CustomError("Usuario no encontrado para eliminar", 404);
+        404;
       }
       res.status(200).json({ message: "Usuario eliminado correctamente" });
     }
@@ -122,7 +153,7 @@ export const deleteUser = async (
     }
     const deleted = await deleteUserService(id);
     if (!deleted) {
-      throw new CustomError("Usuario no encontrado para eliminar", 404); // Error personalizado con código 404
+      throw new CustomError("Usuario no encontrado para eliminar", 404);
     }
     res.status(200).json({ message: "Usuario eliminado correctamente" });
   } catch (error) {
@@ -130,7 +161,9 @@ export const deleteUser = async (
   }
 };
 
-// Restaurar usuario
+/**
+ * Restaurar usuario
+ */
 export const restoreUser = async (
   req: Request,
   res: Response,
@@ -138,10 +171,7 @@ export const restoreUser = async (
 ): Promise<void> => {
   try {
     const { id } = req.params;
-    const restored = await restoreUserService(id);
-    if (!restored) {
-      throw new CustomError("Usuario no encontrado para restaurar", 404); // Error personalizado con código 404
-    }
+    await restoreUserService(id);
     res.status(200).json({ message: "Usuario restaurado correctamente" });
   } catch (error) {
     next(error);

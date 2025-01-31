@@ -41,14 +41,11 @@ export const logoutUser = async (userId: string, state: boolean) => {
     const user = await prisma.user.findUnique({
       where: { id: userId },
     });
-
     if (!user || user.isActive === state) return null;
-
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: { isActive: state },
     });
-
     return updatedUser;
   } catch (error: any) {
     console.error("Error al actualizar el estado del usuario:", error.message);
@@ -92,7 +89,6 @@ export const getUserById = async (id: string) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id },
-      select: { id: true, username: true, email: true },
     });
     return user ? user : null;
   } catch (error: any) {
@@ -151,7 +147,7 @@ export const restoreUser = async (id: string) => {
       where: { id },
       data: { isDeleted: false },
     });
-    return restoredUser ? true : false;
+    return restoredUser;
   } catch (error: any) {
     console.error("Error al restaurar el usuario:", error.message);
     throw error;
