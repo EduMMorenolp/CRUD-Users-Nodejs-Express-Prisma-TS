@@ -75,6 +75,12 @@ npx prisma migrate dev
 
 ## ⚡ **Ejecución**
 
+Ejecuta el siguiente comando para compilar el código TypeScript a JavaScript en la carpeta dist (según la configuración en tsconfig.json):
+
+```bash
+npm run build
+```
+
 Para iniciar el servidor, ejecuta el siguiente comando:
 
 ```bash
@@ -113,32 +119,35 @@ Accede a la documentación interactiva de `Swagger UI` después de iniciar el se
 | **PUT**    | `/users/restore/{id}` | Restaurar usuario (borrado lógico) |
 
 ---
+
 ---
 
 ## 📌 Nuevas Rutas Recomendadas a implementar
 
-###  🔐 Autenticación (`/auth`)
-| Método  | Endpoint                 | Descripción |
-|---------|--------------------------|-------------|
-| **POST**  | `/auth/refresh-token`     | Generar nuevo token de acceso |
-| **POST**  | `/auth/change-password`   | Cambiar contraseña autenticado |
-| **POST**  | `/auth/reset-password`    | Solicitar recuperación de contraseña |
-| **POST**  | `/auth/verify-email`      | Verificar email del usuario |
+### 🔐 Autenticación (`/auth`)
+
+| Método   | Endpoint                | Descripción                          |
+| -------- | ----------------------- | ------------------------------------ |
+| **POST** | `/auth/refresh-token`   | Generar nuevo token de acceso        |
+| **POST** | `/auth/change-password` | Cambiar contraseña autenticado       |
+| **POST** | `/auth/reset-password`  | Solicitar recuperación de contraseña |
+| **POST** | `/auth/verify-email`    | Verificar email del usuario          |
 
 ### 👤 Usuarios (`/users`)
-| Método  | Endpoint                   | Descripción |
-|---------|----------------------------|-------------|
-| **GET**   | `/users/me`                | Obtener perfil autenticado |
-| **PATCH** | `/users/update-profile`    | Actualizar perfil autenticado |
-| **PATCH** | `/users/update-role/{id}`  | Cambiar rol de usuario (admin) |
-| **GET**   | `/users/search`            | Buscar usuarios con filtros |
+
+| Método    | Endpoint                  | Descripción                    |
+| --------- | ------------------------- | ------------------------------ |
+| **GET**   | `/users/me`               | Obtener perfil autenticado     |
+| **PATCH** | `/users/update-profile`   | Actualizar perfil autenticado  |
+| **PATCH** | `/users/update-role/{id}` | Cambiar rol de usuario (admin) |
+| **GET**   | `/users/search`           | Buscar usuarios con filtros    |
 
 ### ⚙️ Utilidades
-| Método  | Endpoint   | Descripción |
-|---------|-----------|-------------|
-| **GET**  | `/health`  | Verificar estado de la API |
-| **GET**  | `/docs`    | Documentación de la API |
 
+| Método  | Endpoint  | Descripción                |
+| ------- | --------- | -------------------------- |
+| **GET** | `/health` | Verificar estado de la API |
+| **GET** | `/docs`   | Documentación de la API    |
 
 ## 📝 **Licencia**
 
