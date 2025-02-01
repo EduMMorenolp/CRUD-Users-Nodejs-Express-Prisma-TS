@@ -29,9 +29,9 @@ router.get(
   verifyAdmin,
   getAllUsers
 );
-router.get("/user/:id", authenticateToken, checkUserActiveMiddleware,verifyAdmin, getUserById);
+router.get("/users/:id", authenticateToken, checkUserActiveMiddleware,verifyAdmin, getUserById);
 router.put(
-  "/user/update/:id",
+  "/users/update/:id",
   authenticateToken,
   checkUserActiveMiddleware,
   validateUpdateUser,
@@ -39,13 +39,13 @@ router.put(
   updateUser
 );
 router.delete(
-  "/user/delete/:id",
+  "/users/delete/:id",
   authenticateToken,
   checkUserActiveMiddleware,verifyAdmin,
   deleteUser
 );
 router.put(
-  "/user/restore/:id",
+  "/users/restore/:id",
   authenticateToken,
   checkUserActiveMiddleware,
   verifyAdmin,
