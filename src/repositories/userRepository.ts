@@ -1,6 +1,7 @@
 // ./src/repositories/userRepository.js
 
 import prisma from "../config/prismaClient.js";
+import { CustomError } from "../utils/CustomError.js";
 
 /**
  * Crear Usuario
@@ -24,8 +25,8 @@ export const createUser = async (
     });
     return { id: user.id, username: user.username, email: user.email };
   } catch (error: any) {
-    console.error("Error al crear el usuario:", error.message);
-    throw error;
+    console.error("❌ Error al crear el usuario:", error.message);
+    throw new CustomError("Error al crear el usuario", 500);
   }
 };
 
@@ -41,8 +42,8 @@ export const getUserByEmail = async (email: string) => {
     });
     return user ? user : null;
   } catch (error: any) {
-    console.error("Error al obtener el mail del usuario:", error.message);
-    throw error;
+    console.error("❌ Error al obtener el usuario por email:", error.message);
+    throw new CustomError("Error al buscar el usuario", 500);
   }
 };
 
@@ -64,8 +65,8 @@ export const logoutUser = async (userId: string, state: boolean) => {
     });
     return updatedUser;
   } catch (error: any) {
-    console.error("Error al actualizar el estado del usuario:", error.message);
-    throw error;
+    console.error("❌ Error al actualizar estado del usuario:", error.message);
+    throw new CustomError("Error al cerrar sesión", 500);
   }
 };
 
@@ -82,11 +83,8 @@ export const checkUserActive = async (userId: string) => {
     });
     return user ? user.isActive : false;
   } catch (error: any) {
-    console.error(
-      "Error al verificar que el usuario está activo:",
-      error.message
-    );
-    throw error;
+    console.error("❌ Error al verificar usuario activo:", error.message);
+    throw new CustomError("Error al verificar estado del usuario", 500);
   }
 };
 
@@ -109,8 +107,8 @@ export const getAllUsers = async () => {
     });
     return users;
   } catch (error: any) {
-    console.error("Error al obtener los usuarios:", error.message);
-    throw error;
+    console.error("❌ Error al obtener los usuarios:", error.message);
+    throw new CustomError("Error al obtener usuarios", 500);
   }
 };
 
@@ -126,8 +124,8 @@ export const getUserById = async (id: string) => {
     });
     return user ? user : null;
   } catch (error: any) {
-    console.error("Error al obtener el usuario:", error.message);
-    throw error;
+    console.error("❌ Error al obtener usuario:", error.message);
+    throw new CustomError("Error al obtener usuario", 500);
   }
 };
 
@@ -162,8 +160,10 @@ export const updateUser = async (
     });
     return updatedUser;
   } catch (error: any) {
-    console.error("Error al actualizar el usuario:", error.message);
-    throw error;
+    console.error("❌ Error al actualizar usuario:", error.message);
+    if (error.code === "P2025")
+      throw new CustomError("Usuario no encontrado", 404);
+    throw new CustomError("Error al actualizar usuario", 500);
   }
 };
 
@@ -180,8 +180,8 @@ export const deleteUser = async (id: string) => {
     });
     return deletedUser ? true : false;
   } catch (error: any) {
-    console.error("Error al eliminar el usuario:", error.message);
-    throw error;
+    console.error("❌ Error al eliminar usuario:", error.message);
+    throw new CustomError("Error al eliminar usuario", 500);
   }
 };
 
@@ -198,7 +198,7 @@ export const restoreUser = async (id: string) => {
     });
     return restoredUser;
   } catch (error: any) {
-    console.error("Error al restaurar el usuario:", error.message);
-    throw error;
+    console.error("❌ Error al restaurar usuario:", error.message);
+    throw new CustomError("Error al restaurar usuario", 500);
   }
 };

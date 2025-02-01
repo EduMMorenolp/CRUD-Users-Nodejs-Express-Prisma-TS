@@ -6,18 +6,20 @@ import { CustomError } from "../utils/CustomError";
 
 /**
  * Manejador de errores
- * @param err 
- * @param req 
- * @param res 
- * @param next 
+ * @param err
+ * @param req
+ * @param res
+ * @param next
  */
 export const errorHandler = (
   err: CustomError,
   req: Request,
-  res: Response,
+  res: Response
 ): void => {
+  console.error("🛑 Error:", err.message);
+
   const statusCode = err.statusCode || 500;
-  const message = err.statusCode ? err.message : "Internal server error";
+  const message = err.message || "Error interno del servidor";
 
   res.status(statusCode).json({
     status: "error",
@@ -26,10 +28,10 @@ export const errorHandler = (
 };
 
 /**
- * Manejador de errores de validación
- * @param req 
- * @param res 
- * @param next 
+ * Manejador de errores de validaciónes
+ * @param req
+ * @param res
+ * @param next
  */
 export const handleValidationErrors = (
   req: Request,
