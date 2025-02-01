@@ -137,8 +137,6 @@ Accede a la documentación interactiva de `Swagger UI` después de iniciar el se
 
 | Método    | Endpoint                  | Descripción                    |
 | --------- | ------------------------- | ------------------------------ |
-| **GET**   | `/users/me`               | Obtener perfil autenticado     |
-| **PATCH** | `/users/update-profile`   | Actualizar perfil autenticado  |
 | **PATCH** | `/users/update-role/{id}` | Cambiar rol de usuario (admin) |
 | **GET**   | `/users/search`           | Buscar usuarios con filtros    |
 
