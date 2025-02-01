@@ -1,5 +1,4 @@
 import User from "../../components/schemas/user/User.js";
-import UserInput from "../../components/schemas/user/UserInput.js";
 
 const updateUser = {
   put: {
@@ -28,7 +27,23 @@ const updateUser = {
       required: true,
       content: {
         "application/json": {
-          schema: UserInput,
+          schema: {
+            type: "object",
+            properties: {
+              username: {
+                type: "string",
+                example: "john_salchichon",
+              },
+              email: {
+                type: "string",
+                example: "john.doe@example.com",
+              },
+              role: {
+                type: "string",
+                example: "admin",
+              },
+            },
+          },
         },
       },
     },

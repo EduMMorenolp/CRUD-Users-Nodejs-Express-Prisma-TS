@@ -141,7 +141,8 @@ export const updateUser = async (
   id: string,
   username?: string,
   email?: string,
-  passwordHash?: string
+  passwordHash?: string,
+  role?: string,
 ) => {
   try {
     const dataToUpdate: any = {};
@@ -153,6 +154,9 @@ export const updateUser = async (
     }
     if (passwordHash) {
       dataToUpdate.password = passwordHash;
+    }
+    if (role) {
+      dataToUpdate.role = role;
     }
     const updatedUser = await prisma.user.update({
       where: { id },

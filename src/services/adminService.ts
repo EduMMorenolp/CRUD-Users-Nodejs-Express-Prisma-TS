@@ -43,7 +43,8 @@ export const updateUserService = async (
   id: string,
   username?: string,
   email?: string,
-  password?: string
+  password?: string,
+  role?: string,
 ) => {
   await getUserByIdService(id);
 
@@ -51,7 +52,7 @@ export const updateUserService = async (
   if (password) {
     passwordHash = await hashPassword(password);
   }
-  await updateUser(id, username, email, passwordHash);
+  await updateUser(id, username, email, passwordHash, role);
 
   const updatedUser = {
     id: id,

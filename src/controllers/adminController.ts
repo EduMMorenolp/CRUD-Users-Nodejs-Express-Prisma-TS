@@ -74,11 +74,11 @@ export const updateUser = async (
 ): Promise<void> => {
   try {
     const { id } = req.params;
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
     const userRole = req.userRol;
 
     if (userRole === "admin") {
-      const updated = await updateUserService(id, username, email, password);
+      const updated = await updateUserService(id, username, email, password, role);
       if (!updated) {
         throw new CustomError("Usuario no encontrado para actualizar", 404);
       }
