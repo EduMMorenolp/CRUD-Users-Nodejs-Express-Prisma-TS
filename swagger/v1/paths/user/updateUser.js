@@ -12,18 +12,6 @@ const updateUser = {
         BearerAuth: [],
       },
     ],
-    parameters: [
-      {
-        name: "id",
-        in: "path",
-        required: true,
-        description: "ID del usuario a actualizar",
-        schema: {
-          type: "string",
-          example: 1,
-        },
-      },
-    ],
     requestBody: {
       required: true,
       content: {

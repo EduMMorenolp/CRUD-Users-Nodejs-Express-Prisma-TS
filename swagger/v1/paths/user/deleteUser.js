@@ -9,18 +9,6 @@ const deleteUser = {
         BearerAuth: [],
       },
     ],
-    parameters: [
-      {
-        name: "id",
-        in: "path",
-        required: true,
-        description: "ID del usuario a eliminar",
-        schema: {
-          type: "string",
-          example: 1,
-        },
-      },
-    ],
     responses: {
       200: {
         description: "Usuario eliminado correctamente (borrado lógico)",

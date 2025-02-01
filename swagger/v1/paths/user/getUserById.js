@@ -11,18 +11,6 @@ const getUserById = {
         BearerAuth: [],
       },
     ],
-    parameters: [
-      {
-        name: "id",
-        in: "path",
-        required: true,
-        description: "ID del usuario",
-        schema: {
-          type: "string",
-          example: 1,
-        },
-      },
-    ],
     responses: {
       200: {
         description: "Usuario encontrado",

@@ -10,11 +10,9 @@ import UserRegister from "./components/schemas/user/UserRegister.js";
 import UserLoginP from "./paths/auth/loginUser.js";
 import UserRegisterP from "./paths/auth/registerUser.js";
 import logoutUser from "./paths/auth/logoutUser.js";
-import getAllUsers from "./paths/user/getAllUsers.js";
 import getUserById from "./paths/user/getUserById.js";
 import updateUser from "./paths/user/updateUser.js";
 import deleteUser from "./paths/user/deleteUser.js";
-import restoreUser from "./paths/user/restoreUser.js";
 
 // Admin
 import getAllUsersAdmin from "./paths/admin/getAllUsersAdmin.js";
