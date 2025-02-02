@@ -1,11 +1,11 @@
 // ./src/services/authService.js
 
+import { getUserByEmail } from "../repositories/userRepository.js";
 import {
   createUser,
-  getUserByEmail,
   loginUser,
   logoutUser,
-} from "../repositories/userRepository.js";
+} from "../repositories/authRepository.js";
 // Importa las funciones de cifrado y comparación de contraseñas
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 // Importa la clase de error personalizado
@@ -15,10 +15,10 @@ import { generateAuthToken } from "../utils/jwt.js";
 
 /**
  * Crear un nuevo usuario
- * @param username 
- * @param email 
- * @param password 
- * @returns 
+ * @param username
+ * @param email
+ * @param password
+ * @returns
  */
 export const createUserService = async (
   username: string,
@@ -39,9 +39,9 @@ export const createUserService = async (
 
 /**
  * Iniciar sesión de un usuario
- * @param email 
- * @param password 
- * @returns 
+ * @param email
+ * @param password
+ * @returns
  */
 export const loginUserService = async (email: string, password: string) => {
   const user = await getUserByEmail(email);
@@ -59,8 +59,11 @@ export const loginUserService = async (email: string, password: string) => {
       401
     );
   }
+  // Generación del token JWT
+  const token = await generateAuthTokenForUser(user.id, user.role);
+
   const userState = await loginUser(email);
-  return userState;
+  return { token, user };
 };
 
 export const logoutUserService = async (userId: string) => {
@@ -77,9 +80,9 @@ export const logoutUserService = async (userId: string) => {
 
 /**
  * Generar el token JWT (ya no es necesario redefinir la función)
- * @param userId 
- * @param role 
- * @returns 
+ * @param userId
+ * @param role
+ * @returns
  */
 export const generateAuthTokenForUser = (userId: string, role: string) => {
   return generateAuthToken(userId, role);

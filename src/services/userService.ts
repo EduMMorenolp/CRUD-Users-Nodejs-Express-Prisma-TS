@@ -47,7 +47,7 @@ export const updateUserService = async (
     id: id,
     username: username,
     email: email,
-    password: "********",
+    password: password,
   };
 
   return updatedUser;

@@ -39,16 +39,15 @@ export const loginUserController = async (
   try {
     const { email, password } = req.body;
     // Autenticación del usuario
-    const user = await loginUserService(email, password);
+    const { token, user } = await loginUserService(email, password);
     if (!user) {
       throw new CustomError(
         "No se pudo iniciar sesión; el usuario no existe o ya estaba activo.",
         404
       );
     }
-    
-    // Generación del token JWT
-    const token = await generateAuthTokenForUser(user.id, user.role);
+
+   
     // Respuesta exitosa con token
     res.status(200).json({
       message: "Inicio de sesión exitoso",
