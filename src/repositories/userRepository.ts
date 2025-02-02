@@ -73,6 +73,24 @@ export const logoutUser = async (userId: string) => {
 };
 
 /**
+ * Verificar si el usuario está activo
+ * @param userId
+ * @returns
+ */
+export const checkUserActive = async (userId: string) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { isActive: true },
+    });
+    return user ? user.isActive : false;
+  } catch (error: any) {
+    console.error("❌ Error al verificar usuario activo:", error.message);
+    throw new CustomError("Error al verificar estado del usuario", 500);
+  }
+};
+
+/**
  * Obtener email de Usuario
  * @param email
  * @returns
