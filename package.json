@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "dev": "node --watch ./dist/server.js",
-    "devtsc": "tsc --watch",
+    "devts": "tsc --watch",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

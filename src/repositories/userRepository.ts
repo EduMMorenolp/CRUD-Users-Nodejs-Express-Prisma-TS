@@ -31,19 +31,21 @@ export const createUser = async (
 };
 
 /**
- * Obtener email de Usuario
+ * Iniciar sesion de Usuario
  * @param email
+ * @param password
  * @returns
  */
-export const getUserByEmail = async (email: string) => {
+export const loginUser = async (email: string) => {
   try {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.update({
       where: { email },
+      data: { isActive: true },
     });
-    return user ? user : null;
+    return user;
   } catch (error: any) {
-    console.error("❌ Error al obtener el usuario por email:", error.message);
-    throw new CustomError("Error al buscar el usuario", 500);
+    console.error("❌ Error al iniciar sesión:", error.message);
+    throw new CustomError("Error al iniciar sesión", 500);
   }
 };
 
@@ -53,17 +55,17 @@ export const getUserByEmail = async (email: string) => {
  * @param state
  * @returns
  */
-export const logoutUser = async (userId: string, state: boolean) => {
+export const logoutUser = async (userId: string) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id: userId },
     });
-    if (!user || user.isActive === state) return null;
-    const updatedUser = await prisma.user.update({
+    if (!user) return null;
+    await prisma.user.update({
       where: { id: userId },
-      data: { isActive: state },
+      data: { isActive: false },
     });
-    return updatedUser;
+    return { message: "Sesión cerrada exitosamente", status: 200 };
   } catch (error: any) {
     console.error("❌ Error al actualizar estado del usuario:", error.message);
     throw new CustomError("Error al cerrar sesión", 500);
@@ -71,20 +73,19 @@ export const logoutUser = async (userId: string, state: boolean) => {
 };
 
 /**
- * Verificar si el usuario está activo
- * @param userId
+ * Obtener email de Usuario
+ * @param email
  * @returns
  */
-export const checkUserActive = async (userId: string) => {
+export const getUserByEmail = async (email: string) => {
   try {
     const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { isActive: true },
+      where: { email },
     });
-    return user ? user.isActive : false;
+    return user;
   } catch (error: any) {
-    console.error("❌ Error al verificar usuario activo:", error.message);
-    throw new CustomError("Error al verificar estado del usuario", 500);
+    console.error("❌ Error al obtener el usuario por email:", error.message);
+    throw new CustomError("Error al buscar el usuario", 500);
   }
 };
 
@@ -142,7 +143,7 @@ export const updateUser = async (
   username?: string,
   email?: string,
   passwordHash?: string,
-  role?: string,
+  role?: string
 ) => {
   try {
     const dataToUpdate: any = {};

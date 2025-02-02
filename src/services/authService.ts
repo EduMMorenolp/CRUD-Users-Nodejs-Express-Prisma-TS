@@ -3,6 +3,7 @@
 import {
   createUser,
   getUserByEmail,
+  loginUser,
   logoutUser,
 } from "../repositories/userRepository.js";
 // Importa las funciones de cifrado y comparación de contraseñas
@@ -44,7 +45,7 @@ export const createUserService = async (
  */
 export const loginUserService = async (email: string, password: string) => {
   const user = await getUserByEmail(email);
-  if (!user) {
+  if (!user || user.isDeleted) {
     throw new CustomError(
       "Por favor, verifica tu dirección de correo electrónico y tu contraseña e intenta nuevamente.",
       401
@@ -58,15 +59,13 @@ export const loginUserService = async (email: string, password: string) => {
       401
     );
   }
-  const userId: string = user.id;
-  const state = true;
-  const userState = await logoutUser(userId, state);
+  const userState = await loginUser(email);
   return userState;
 };
 
 export const logoutUserService = async (userId: string) => {
   const state = false;
-  const success = await logoutUser(userId, state);
+  const success = await logoutUser(userId);
   if (!success) {
     throw new CustomError(
       "Parece que hubo un problema al intentar cerrar sesión. Esto puede deberse a que tu cuenta ya estaba inactiva o no existe en nuestro sistema.",
