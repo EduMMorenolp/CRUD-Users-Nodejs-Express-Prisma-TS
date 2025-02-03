@@ -2,7 +2,7 @@
 
 import app from "./app.js";
 import dotenv from "dotenv";
-import { checkDatabaseConnection } from "./config/checkDatabase.js";
+import { checkDatabaseConnection } from "./config/prismaClient.js";
 
 dotenv.config();
 
