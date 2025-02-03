@@ -92,6 +92,7 @@ npm run start
 Accede a la documentación interactiva de `Swagger UI` después de iniciar el servidor:
 
 ```bash
+✅ La base de datos está online.
 ==================================================
 🚀 Servidor corriendo en: http://localhost:3000
 📃 Swagger Docs: http://localhost:3000/api-docs
@@ -108,15 +109,24 @@ Accede a la documentación interactiva de `Swagger UI` después de iniciar el se
 | **POST** | `/auth/login`    | Iniciar sesión             |
 | **POST** | `/auth/logout`   | Cerrar sesión              |
 
+### 👨‍💼 Admin (`/admin`)
+
+| Método     | Endpoint                    | Descripción                        |
+| ---------- | --------------------------- | ---------------------------------- |
+| **GET**    | `/admin/allusers`           | Obtener todos los usuarios         |
+| **GET**    | `/admin/users/{id}`         | Obtener usuario por ID             |
+| **GET**    | `/admin/search`             | Buscar usuarios con filtros        |
+| **PUT**    | `/admin/users/update/{id}`  | Actualizar usuario                 |
+| **DELETE** | `/admin/users/delete/{id}`  | Eliminar usuario (borrado lógico)  |
+| **PUT**    | `/admin/users/restore/{id}` | Restaurar usuario (borrado lógico) |
+
 ### 👤 Usuarios (`/users`)
 
-| Método     | Endpoint              | Descripción                        |
-| ---------- | --------------------- | ---------------------------------- |
-| **GET**    | `/users`              | Obtener todos los usuarios         |
-| **GET**    | `/users/{id}`         | Obtener usuario por ID             |
-| **PUT**    | `/users/update/{id}`  | Actualizar usuario                 |
-| **DELETE** | `/users/delete/{id}`  | Eliminar usuario (borrado lógico)  |
-| **PUT**    | `/users/restore/{id}` | Restaurar usuario (borrado lógico) |
+| Método     | Endpoint        | Descripción                       |
+| ---------- | --------------- | --------------------------------- |
+| **GET**    | `/users`        | Obtener datos del usuario         |
+| **PUT**    | `/users/update` | Actualizar usuario                |
+| **DELETE** | `/users/delete` | Eliminar usuario (borrado lógico) |
 
 ---
 
@@ -138,14 +148,12 @@ Accede a la documentación interactiva de `Swagger UI` después de iniciar el se
 | Método    | Endpoint                  | Descripción                    |
 | --------- | ------------------------- | ------------------------------ |
 | **PATCH** | `/users/update-role/{id}` | Cambiar rol de usuario (admin) |
-| **GET**   | `/users/search`           | Buscar usuarios con filtros    |
 
 ### ⚙️ Utilidades
 
 | Método  | Endpoint  | Descripción                |
 | ------- | --------- | -------------------------- |
 | **GET** | `/health` | Verificar estado de la API |
-| **GET** | `/docs`   | Documentación de la API    |
 
 ## 📝 **Licencia**
 
