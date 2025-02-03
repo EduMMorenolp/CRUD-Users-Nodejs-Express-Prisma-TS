@@ -46,8 +46,6 @@ export const loginUserController = async (
         404
       );
     }
-
-   
     // Respuesta exitosa con token
     res.status(200).json({
       message: "Inicio de sesión exitoso",

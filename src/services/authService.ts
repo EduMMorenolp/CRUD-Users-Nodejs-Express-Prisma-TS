@@ -25,15 +25,11 @@ export const createUserService = async (
   email: string,
   password: string
 ) => {
-  // Verificar el email
   const existingUser = await getUserByEmail(email);
   if (existingUser) {
     throw new CustomError("El correo electrónico ya está en uso", 409);
   }
-  // Cifrar la contraseña
   const hashedPassword = await hashPassword(password);
-
-  // Guardar el nuevo usuario en la base de datos
   return await createUser(username, email, hashedPassword);
 };
 
@@ -51,7 +47,6 @@ export const loginUserService = async (email: string, password: string) => {
       401
     );
   }
-  // Comparar la contraseña
   const isMatch = await comparePassword(password, user.password);
   if (!isMatch) {
     throw new CustomError(
@@ -61,7 +56,6 @@ export const loginUserService = async (email: string, password: string) => {
   }
   // Generación del token JWT
   const token = await generateAuthTokenForUser(user.id, user.role);
-
   const userState = await loginUser(email);
   return { token, user };
 };

@@ -25,10 +25,13 @@ setupSwaggerV1(app);
 import morgan from 'morgan';
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
+const BASE_PATH = process.env.BASE_PATH || "";
+const VERSIONS_API = process.env.VERSIONS_API || "";
+
 // Routes
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/user', userRoutes);
-app.use('/api/v1/admin', adminRoutes);
+app.use(`/${BASE_PATH}/${VERSIONS_API}`, authRoutes);
+app.use(`/${BASE_PATH}/${VERSIONS_API}`, userRoutes);
+app.use(`/${BASE_PATH}/${VERSIONS_API}`, adminRoutes);
 
 // Middleware para manejar errores
 app.use(errorHandler);

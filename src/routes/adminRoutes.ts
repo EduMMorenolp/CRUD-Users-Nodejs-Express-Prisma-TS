@@ -23,15 +23,15 @@ const router = express.Router();
  * Rutas de usuarios
  */
 router.get(
-  "/allusers",
+  "/admin/allusers",
   authenticateToken,
   checkUserActiveMiddleware,
   verifyAdmin,
   getAllUsers
 );
-router.get("/users/:id", authenticateToken, checkUserActiveMiddleware,verifyAdmin, getUserById);
+router.get("/admin/users/:id", authenticateToken, checkUserActiveMiddleware,verifyAdmin, getUserById);
 router.put(
-  "/users/update/:id",
+  "/admin/users/update/:id",
   authenticateToken,
   checkUserActiveMiddleware,
   validateUpdateUser,
@@ -39,13 +39,13 @@ router.put(
   updateUser
 );
 router.delete(
-  "/users/delete/:id",
+  "/admin/users/delete/:id",
   authenticateToken,
   checkUserActiveMiddleware,verifyAdmin,
   deleteUser
 );
 router.put(
-  "/users/restore/:id",
+  "/admin/users/restore/:id",
   authenticateToken,
   checkUserActiveMiddleware,
   verifyAdmin,

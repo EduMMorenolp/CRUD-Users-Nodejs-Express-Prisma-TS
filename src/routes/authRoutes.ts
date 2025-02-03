@@ -19,17 +19,17 @@ const router = express.Router();
  * Rutas de autenticación
  */
 router.post(
-  "/register",
+  "/auth/register",
   validateUserRegister,
   handleValidationErrors,
   registerUser
 );
 router.post(
-  "/login",
+  "/auth/login",
   validateUserLogin,
   handleValidationErrors,
   loginUserController
 );
-router.post("/logout", authenticateToken, logoutUserController);
+router.post("/auth/logout", authenticateToken, logoutUserController);
 
 export default router;

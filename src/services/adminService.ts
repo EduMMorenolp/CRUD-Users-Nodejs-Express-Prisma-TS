@@ -47,20 +47,17 @@ export const updateUserService = async (
   role?: string,
 ) => {
   await getUserByIdService(id);
-
   let passwordHash = undefined;
   if (password) {
     passwordHash = await hashPassword(password);
   }
   await updateUser(id, username, email, passwordHash, role);
-
   const updatedUser = {
     id: id,
     username: username,
     email: email,
     password: password,
   };
-
   return updatedUser;
 };
 

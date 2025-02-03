@@ -42,14 +42,12 @@ export const updateUserService = async (
     passwordHash = await hashPassword(password);
   }
   await updateUser(id, username, email, passwordHash);
-
   const updatedUser = {
     id: id,
     username: username,
     email: email,
     password: password,
   };
-
   return updatedUser;
 };
 

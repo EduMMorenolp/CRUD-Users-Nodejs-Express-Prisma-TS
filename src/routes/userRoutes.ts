@@ -19,9 +19,9 @@ const router = express.Router();
 /**
  * Rutas de usuarios
  */
-router.get("/", authenticateToken, checkUserActiveMiddleware, getUserById);
+router.get("/user/", authenticateToken, checkUserActiveMiddleware, getUserById);
 router.put(
-  "/update",
+  "/user/update",
   authenticateToken,
   checkUserActiveMiddleware,
   validateUpdateUser,
@@ -29,7 +29,7 @@ router.put(
   updateUser
 );
 router.delete(
-  "/delete",
+  "/user/delete",
   authenticateToken,
   checkUserActiveMiddleware,
   deleteUser

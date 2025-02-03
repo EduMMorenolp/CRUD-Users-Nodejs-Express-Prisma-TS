@@ -42,7 +42,6 @@ export const getUserById = async (
       throw new CustomError("ID de usuario no proporcionado", 400);
     }
     const userRole = req.userRol;
-
     if (userRole === "admin") {
       const user = await getUserByIdService(id);
       const userData = {
@@ -76,7 +75,6 @@ export const updateUser = async (
     const { id } = req.params;
     const { username, email, password, role } = req.body;
     const userRole = req.userRol;
-
     if (userRole === "admin") {
       const updated = await updateUserService(id, username, email, password, role);
       if (!updated) {
