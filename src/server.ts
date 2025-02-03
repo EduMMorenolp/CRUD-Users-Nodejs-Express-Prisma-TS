@@ -20,7 +20,7 @@ async function startServer() {
 
   // Arrancar el servidor
   app.listen(PORT, () => {
-    console.log("\n==================================================");
+    console.log("==================================================");
     console.log(`🚀 Servidor corriendo en: http://${HOST}:${PORT}`);
     console.log(`📃 Swagger Docs: http://${HOST}:${PORT}/api-docs`);
     console.log("==================================================\n");

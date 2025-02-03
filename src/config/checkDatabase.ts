@@ -17,8 +17,6 @@ export async function checkDatabaseConnection(): Promise<boolean> {
       console.error("La base de datos no existe.");
     } else if (error.code === "28P01") {
       console.error("Credenciales incorrectas.");
-    } else {
-      console.error("Error desconocido:", error.message);
     }
 
     return false;
