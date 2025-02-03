@@ -99,7 +99,9 @@ Accede a la documentación interactiva de `Swagger UI` después de iniciar el se
 ==================================================
 ```
 
-## 📌 API de Usuarios y Autenticación
+---
+
+## 📌 Endpoints
 
 ### 🔐 Autenticación (`/auth`)
 
@@ -127,10 +129,6 @@ Accede a la documentación interactiva de `Swagger UI` después de iniciar el se
 | **GET**    | `/users`        | Obtener datos del usuario         |
 | **PUT**    | `/users/update` | Actualizar usuario                |
 | **DELETE** | `/users/delete` | Eliminar usuario (borrado lógico) |
-
----
-
----
 
 ## 📌 Nuevas Rutas Recomendadas a implementar
 
