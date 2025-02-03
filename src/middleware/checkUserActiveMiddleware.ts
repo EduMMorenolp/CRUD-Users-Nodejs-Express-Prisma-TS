@@ -4,9 +4,9 @@ import { NextFunction, Request, Response } from "express";
 
 /**
  * Verificar si el usuario está activo
- * @param req 
- * @param res 
- * @param next 
+ * @param req
+ * @param res
+ * @param next
  */
 export const checkUserActiveMiddleware = async (
   req: Request,

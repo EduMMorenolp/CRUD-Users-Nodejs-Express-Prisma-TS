@@ -20,6 +20,7 @@ import getUserByIdAdmin from "./paths/admin/getUserByIdAdmin.js";
 import updateUserAdmin from "./paths/admin/updateUserAdmin.js";
 import deleteUserAdmin from "./paths/admin/deleteUserAdmin.js";
 import restoreUserAdmin from "./paths/admin/restoreUserAdmin.js";
+import searchUsers from "./paths/admin/searchUsersAdmin.js";
 
 const swaggerSpec = {
   openapi: "3.0.0",
@@ -33,6 +34,7 @@ const swaggerSpec = {
     // Admin
     "/admin/allusers": getAllUsersAdmin,
     "/admin/users/{id}": getUserByIdAdmin,
+    "/admin/search": searchUsers,
     "/admin/users/update/{id}": updateUserAdmin,
     "/admin/users/delete/{id}": deleteUserAdmin,
     "/admin/users/restore/{id}": restoreUserAdmin,

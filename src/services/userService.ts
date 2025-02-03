@@ -10,8 +10,8 @@ import { CustomError } from "../utils/CustomError.js";
 
 /**
  * Obtener usuario por ID
- * @param id 
- * @returns 
+ * @param id
+ * @returns
  */
 export const getUserByIdService = async (id: string) => {
   const user = await getUserById(id);
@@ -23,11 +23,11 @@ export const getUserByIdService = async (id: string) => {
 
 /**
  * Actualizar usuario
- * @param id 
- * @param username 
- * @param email 
- * @param password 
- * @returns 
+ * @param id
+ * @param username
+ * @param email
+ * @param password
+ * @returns
  */
 export const updateUserService = async (
   id: string,
@@ -53,8 +53,8 @@ export const updateUserService = async (
 
 /**
  * Eliminar usuario
- * @param id 
- * @returns 
+ * @param id
+ * @returns
  */
 export const deleteUserService = async (id: string) => {
   await getUserByIdService(id);

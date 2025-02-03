@@ -3,9 +3,9 @@ import { Request, Response, NextFunction } from "express";
 
 /**
  * Verificar si el usuario es administrador
- * @param req 
- * @param res 
- * @param next 
+ * @param req
+ * @param res
+ * @param next
  */
 export const verifyAdmin = (
   req: Request,

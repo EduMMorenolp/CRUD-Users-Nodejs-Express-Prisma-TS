@@ -2,11 +2,12 @@
 
 import express from "express";
 import {
-  deleteUser,
-  getAllUsers,
-  getUserById,
-  updateUser,
-  restoreUser,
+  deleteUserController,
+  getAllUsersController,
+  getUserByIdController,
+  updateUserController,
+  restoreUserController,
+  searchUserController,
 } from "../controllers/adminController.js";
 
 // Middlewares
@@ -27,29 +28,45 @@ router.get(
   authenticateToken,
   checkUserActiveMiddleware,
   verifyAdmin,
-  getAllUsers
+  getAllUsersController
 );
-router.get("/admin/users/:id", authenticateToken, checkUserActiveMiddleware,verifyAdmin, getUserById);
+router.get(
+  "/admin/search",
+  authenticateToken,
+  checkUserActiveMiddleware,
+  verifyAdmin,
+  searchUserController
+);
+
+router.get(
+  "/admin/users/:id",
+  authenticateToken,
+  checkUserActiveMiddleware,
+  verifyAdmin,
+  getUserByIdController
+);
 router.put(
   "/admin/users/update/:id",
   authenticateToken,
   checkUserActiveMiddleware,
   validateUpdateUser,
-  handleValidationErrors,verifyAdmin,
-  updateUser
+  handleValidationErrors,
+  verifyAdmin,
+  updateUserController
 );
 router.delete(
   "/admin/users/delete/:id",
   authenticateToken,
-  checkUserActiveMiddleware,verifyAdmin,
-  deleteUser
+  checkUserActiveMiddleware,
+  verifyAdmin,
+  deleteUserController
 );
 router.put(
   "/admin/users/restore/:id",
   authenticateToken,
   checkUserActiveMiddleware,
   verifyAdmin,
-  restoreUser
+  restoreUserController
 );
 
 export default router;

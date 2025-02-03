@@ -6,6 +6,7 @@ import {
   getUserById,
   updateUser,
   restoreUser,
+  searchUsers,
 } from "../repositories/userRepository.js";
 import { hashPassword } from "../utils/bcrypt.js";
 import { CustomError } from "../utils/CustomError.js";
@@ -26,7 +27,8 @@ export const getAllUsersService = async () => {
 export const getUserByIdService = async (id: string) => {
   const user = await getUserById(id);
   if (!user) {
-    throw new CustomError("El usuario no existe.", 404);
+    console.log("Error en Servicio - getUserByIdService");
+    throw new CustomError("El usuario no exisssssste.", 404);
   }
   return user;
 };
@@ -44,7 +46,7 @@ export const updateUserService = async (
   username?: string,
   email?: string,
   password?: string,
-  role?: string,
+  role?: string
 ) => {
   await getUserByIdService(id);
   let passwordHash = undefined;
@@ -57,7 +59,7 @@ export const updateUserService = async (
     username: username,
     email: email,
     password: password,
-    role: role
+    role: role,
   };
   return updatedUser;
 };
@@ -83,4 +85,12 @@ export const restoreUserService = async (id: string) => {
     throw new CustomError("El usuario ya está activo.", 400);
   }
   return await restoreUser(id);
+};
+
+/**
+ * Buscar usuarios con filtros
+ */
+export const searchUsersService = async (filters: any) => {
+  const users = await searchUsers(filters);
+  return users;
 };

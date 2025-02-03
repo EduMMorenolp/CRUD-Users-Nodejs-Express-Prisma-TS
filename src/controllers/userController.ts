@@ -10,7 +10,6 @@ import {
 // Importar la clase de error personalizado
 import { CustomError } from "../utils/CustomError.js";
 
-
 /**
  * Obtener usuario por ID
  */

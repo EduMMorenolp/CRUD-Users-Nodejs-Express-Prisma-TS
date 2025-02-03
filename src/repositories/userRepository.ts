@@ -1,5 +1,6 @@
 // ./src/repositories/userRepository.js
 
+import exp from "constants";
 import prisma from "../config/prismaClient.js";
 import { CustomError } from "../utils/CustomError.js";
 
@@ -73,6 +74,31 @@ export const getUserById = async (id: string) => {
       where: { id },
     });
     return user ? user : null;
+  } catch (error: any) {
+    console.error("❌ Error al obtener usuario:", error.message);
+    throw new CustomError("Error al obtener usuario", 500);
+  }
+};
+
+/**
+ * Buscar usuarios con filtros
+ */
+export const searchUsers = async (filters: any) => {
+  try {
+    const { username, email, role, isActive } = filters;
+    const users = await prisma.user.findMany({
+      where: {
+        username: {
+          contains: username,
+        },
+        email: {
+          contains: email,
+        },
+        role: role || undefined,
+        isActive: isActive !== undefined ? isActive : undefined,
+      },
+    });
+    return users;
   } catch (error: any) {
     console.error("❌ Error al obtener usuario:", error.message);
     throw new CustomError("Error al obtener usuario", 500);

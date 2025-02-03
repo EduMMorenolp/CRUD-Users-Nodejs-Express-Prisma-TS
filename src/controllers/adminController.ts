@@ -8,6 +8,7 @@ import {
   getUserByIdService,
   updateUserService,
   restoreUserService,
+  searchUsersService,
 } from "../services/adminService.js";
 // Importar la clase de error personalizado
 import { CustomError } from "../utils/CustomError.js";
@@ -15,7 +16,7 @@ import { CustomError } from "../utils/CustomError.js";
 /**
  * Obtener todos los usuarios
  */
-export const getAllUsers = async (
+export const getAllUsersController = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -31,7 +32,7 @@ export const getAllUsers = async (
 /**
  * Obtener usuario por ID
  */
-export const getUserById = async (
+export const getUserByIdController = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -66,7 +67,7 @@ export const getUserById = async (
 /**
  * Actualizar usuario
  */
-export const updateUser = async (
+export const updateUserController = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -76,7 +77,13 @@ export const updateUser = async (
     const { username, email, password, role } = req.body;
     const userRole = req.userRol;
     if (userRole === "admin") {
-      const updated = await updateUserService(id, username, email, password, role);
+      const updated = await updateUserService(
+        id,
+        username,
+        email,
+        password,
+        role
+      );
       if (!updated) {
         throw new CustomError("Usuario no encontrado para actualizar", 404);
       }
@@ -95,7 +102,7 @@ export const updateUser = async (
 /**
  * Eliminar usuario
  */
-export const deleteUser = async (
+export const deleteUserController = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -125,7 +132,7 @@ export const deleteUser = async (
 /**
  * Restaurar usuario
  */
-export const restoreUser = async (
+export const restoreUserController = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -134,6 +141,40 @@ export const restoreUser = async (
     const { id } = req.params;
     await restoreUserService(id);
     res.status(200).json({ message: "Usuario restaurado correctamente" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Buscar usuarios con filtros
+ */
+export const searchUserController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    let { username, email, role, isActive } = req.query;
+    // Convertimos 'isActive' a booleano, si es un valor válido
+    let isActiveBoolean;
+    if (isActive) {
+      if (isActive === "true") {
+        isActiveBoolean = true;
+      } else if (isActive === "false") {
+        isActiveBoolean = false;
+      } else {
+        throw new Error("El campo 'isActive' debe ser 'true' o 'false'.");
+      }
+    }
+    const filters = {
+      username: username || undefined,
+      email: email || undefined,
+      role: role || undefined,
+      isActive: isActiveBoolean || undefined,
+    };
+    const users = await searchUsersService(filters);
+    res.status(200).json(users);
   } catch (error) {
     next(error);
   }
