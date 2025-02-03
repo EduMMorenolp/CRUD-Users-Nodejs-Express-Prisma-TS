@@ -57,6 +57,7 @@ export const updateUserService = async (
     username: username,
     email: email,
     password: password,
+    role: role
   };
   return updatedUser;
 };

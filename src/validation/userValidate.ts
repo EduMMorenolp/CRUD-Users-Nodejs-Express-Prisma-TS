@@ -48,6 +48,13 @@ export const validateUpdateUser = [
     .isLength({ max: 255 })
     .withMessage("El correo electrónico no puede exceder los 255 caracteres."),
 
+  body("role")
+    .optional()
+    .isString()
+    .withMessage("El rol debe ser una cadena de texto.")
+    .isIn(["admin", "user"])
+    .withMessage("El rol debe ser 'admin' o 'user'."),
+
   checkExact([], {
     message: "Campos adicionales no permitidos.",
   }),
