@@ -1,12 +1,14 @@
 import cors from "cors";
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config(); // Asegurar que las variables de entorno estén cargadas
 
 const allowedOrigins = [
   process.env.CLIENT_URL,
   process.env.ANOTHER_ALLOWED_URL,
-].filter(Boolean); // Filtra valores undefined o vacíos
+  "http://localhost:4000",
+  "http://localhost:3000",
+].filter(Boolean); // Elimina valores `undefined` o `null`
 
 const corsOptions = {
   origin: (
@@ -14,13 +16,15 @@ const corsOptions = {
     callback: (err: Error | null, allow?: boolean) => void
   ) => {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
+      callback(null, true); // Permitir acceso
     } else {
-      callback(new Error("No permitido por CORS"));
+      callback(new Error("Not allowed by CORS")); // Bloquear acceso
     }
   },
-  credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 };
 
-export default cors(corsOptions);
+// Exportar el middleware
+export const corsMiddleware = cors(corsOptions);

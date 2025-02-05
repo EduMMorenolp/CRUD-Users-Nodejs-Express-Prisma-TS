@@ -2,7 +2,7 @@
 
 import express from "express";
 import dotenv from "dotenv";
-import corsMiddleware from "./middleware/corsMiddleware";
+import { corsMiddleware } from "./middleware/corsMiddleware.js";
 
 // Import Middleware
 import { errorHandler } from "./middleware/errorHandler.js";
