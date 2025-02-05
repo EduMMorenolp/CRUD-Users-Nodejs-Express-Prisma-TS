@@ -20,7 +20,9 @@ export const errorHandler = (
   console.error("🔥 Error:", err.message);
   const statusCode = err.statusCode || 500;
   const message = err.statusCode ? err.message : "Internal server error";
-
+  if (res.headersSent) {
+    return next(err);
+  }
   res.status(statusCode).json({
     status: "error",
     message,
@@ -46,5 +48,4 @@ export const handleValidationErrors = (
       errors: errors.array(),
     });
   }
-  next();
 };

@@ -26,6 +26,9 @@ export const createUser = async (
     return { id: user.id, username: user.username, email: user.email };
   } catch (error: any) {
     console.error("❌ Error al crear el usuario:", error.message);
+    if (error.code === "P2002") {
+      throw new CustomError("El correo electrónico ya está en uso", 409);
+    }
     throw new CustomError("Error al crear el usuario", 500);
   }
 };
