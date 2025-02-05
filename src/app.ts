@@ -2,6 +2,7 @@
 
 import express from "express";
 import dotenv from "dotenv";
+import corsMiddleware from "./middleware/corsMiddleware";
 
 // Import Middleware
 import { errorHandler } from "./middleware/errorHandler.js";
@@ -15,6 +16,9 @@ import authRoutes from "./routes/authRoutes.js";
 dotenv.config();
 const app = express();
 app.use(express.json());
+
+// Aplicar el middleware de CORS
+app.use(corsMiddleware);
 
 // Swagger
 // @ts-ignore
