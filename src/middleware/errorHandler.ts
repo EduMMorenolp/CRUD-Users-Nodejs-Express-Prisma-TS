@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 // @ts-ignore
-import { validationResult } from "express-validator";
+import { validationResult, validationError } from "express-validator";
 
-import { CustomError } from "../utils/CustomError";
+import { CustomError } from "../utils/CustomError.js";
 
 /**
  * Manejador de errores
@@ -39,13 +39,18 @@ export const handleValidationErrors = (
   req: Request,
   res: Response,
   next: NextFunction
-): void => {
+): Response | void => {
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
-    res.status(400).json({
+    return res.status(400).json({
       status: "error",
       message: "Datos de entrada inválidos",
-      errors: errors.array(),
+      errors: errors.array().map((error : validationError) => ({
+        campo: error.param,
+        mensaje: error.msg,
+      })),
     });
   }
+  next();
 };
