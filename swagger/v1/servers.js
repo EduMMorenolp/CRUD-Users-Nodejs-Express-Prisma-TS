@@ -3,16 +3,15 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-const port = process.env.PORT || 3000;
+const baseUrl = process.env.BASE_URL || "http://localhost:3000";
 const basePath = process.env.BASE_PATH || "api";
-const baseUrl = process.env.BASE_URL || "http://localhost";
 const versionsApi = process.env.VERSIONS_API
   ? process.env.VERSIONS_API.split(",")
   : ["v1"];
 
 const servers = [
   {
-    url: `${baseUrl}:${port}/${basePath}/${versionsApi}`,
+    url: `${baseUrl}/${basePath}/${versionsApi}`,
     description: "URL Server",
     variables: {
       basePath: {

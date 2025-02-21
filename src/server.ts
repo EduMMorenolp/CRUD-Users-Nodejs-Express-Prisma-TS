@@ -7,7 +7,7 @@ import { checkDatabaseConnection } from "./config/prismaClient.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || "localhost";
+const HOST = process.env.BASE_URL || "localhost:3000";
 
 // Función para arrancar el servidor
 async function startServer() {
@@ -21,8 +21,8 @@ async function startServer() {
   // Arrancar el servidor
   app.listen(PORT, () => {
     console.log("==================================================");
-    console.log(`🚀 Servidor corriendo en: http://${HOST}:${PORT}`);
-    console.log(`📃 Swagger Docs: http://${HOST}:${PORT}/api-docs`);
+    console.log(`🚀 Servidor corriendo en: http://${HOST}`);
+    console.log(`📃 Swagger Docs: http://${HOST}/api-docs`);
     console.log("==================================================\n");
   });
 }
